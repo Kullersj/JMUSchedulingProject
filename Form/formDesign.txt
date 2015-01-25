@@ -1,0 +1,18 @@
+Creator: Justin Conner
+Date: 12/20/2014
+
+Lab Scheduling Form:
+	Form Fields:
+		Credentials
+			-	Name
+			-	Address
+			-	JAC Number
+			-	Email
+		Preferences
+			-	Back to back shifts
+			-	1 location or both
+			-	Preferred Location
+			-	Times it is impossible to work
+			-	Times preferred to work
+			-	Classes and times
+			

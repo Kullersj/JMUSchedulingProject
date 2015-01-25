@@ -1,0 +1,17 @@
+Lab Scheduling Form Creation Timesheet:
+
+12/20/2014 : 8 hours
+	- Form design and initial creation.
+	- Created 2 different types: HTML and GoogleForm
+	- See version index-v2
+	
+12/27/2014 : 5 hours
+	- Complete form - v1
+	- Start algorithm creation  
+
+1/15/2015 : 30 mins
+	- presentation
+	
+
+	
+	

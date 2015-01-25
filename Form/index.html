@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>JMU Scheduling Form</title>
+        <meta name="description" content="An interactive getting started guide for Brackets.">
+        <link rel="stylesheet" href="main.css">
+        <style type="text/css">
+            #Text1
+            {
+                height: 0px;
+            }
+        </style>
+        <script type = "text/javascript">
+            // from textBoxes.html
+            function getCredentials()
+            {
+                var name = document.getElementById("Name").value;
+                var address = document.getElementById("Address").value;
+                var email = document.getElementById("Email").value;
+                txtOutput.value = "Hi there, " + name + "!"
+                
+            } // end sayHi
+        </script>
+        <!--
+            MADE WITH <3 AND JAVASCRIPT
+            - Tableizer:
+                http://www.makeuseof.com/tag/7-cool-html-effects-that-anyone-can-add-to-their-website-nb/
+        -->
+</head>
+    <body>
+        <img src="images/dukes.png" style="width:225px;height:200px">
+        <h1><center>JMU Scheduling Form</center></h1>
+        <p>The following form will help us determine the work schedule for the labs. Please respond truthfully.Your answers will help us create a work schedule that is better tailored to everyone's preferrences.</p></br>
+        <hr class=style-1>
+        <p><strong><center>Please be aware that you may not get every shift you prefer, but you will have a higher possibility of getting your preferred shifts if you fill out the form correctly.</center></strong></p>
+        <hr class=style-1></br>
+
+        <form id='sampleform' method='post' action='output.php' >
+            <h5>Employee Information:  </h5>
+            <input type="text" name="fname" placeholder="First Name" style="margin-left: 30px;"/></br>
+		    <input type="text" name="lname" placeholder="Last Name" style="margin-left: 30px;"/></br>
+		    <input type="text" name="phone" placeholder="Phone" style="margin-left: 30px;"/></br>
+            <input type="text" name="address" placeholder="Address" style="margin-left: 30px;"/></br>
+            <input type="text" name="jac" placeholder="JAC Number" style="margin-left: 30px;"/></br>
+            <h5>Check all that apply:  </h5>
+            <p><input type="checkbox" name="back2back" style="margin-left: 34px" />Back to back shifts are preferred</p>
+            <p><input type="checkbox" name="bothlocation" style="margin-left: 34px" />I am okay with working at both locations (Showker/Hillside)</p>
+                <h5>Preferred Location:  </h5>
+                <select name="location" 
+                        style="height: 24px; width: 88px; margin-left: 30px; margin-top: 0px">
+                    <option value="showker">Showker</option>
+                    <option value="hillside">Hillside</option>
+                </select></br></br></br>
+    
+            <table id="schedTable">
+                <h2><center>Preferred Work Times</center></h2>
+                Fill out the following table.</br>
+                If you are available during a specific shift, select the "Yes" dial.
+                Otherwise, select the "No" dial. </br>
+                If you prefer the specific shift, select "Yes" under Preferred. If you wish to not work the shift, select "No" </br></br>
+                
+                <tr>
+                    <th></th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>		
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                </tr>
+                <tr>
+                    <th>7:45am - 10:00am</th>
+                    <td><center>
+                        Available:
+                        <br>
+                        <input type="radio" name="monOpen" value="yes" checked>Yes
+                        <input type="radio" name="monOpen" value="availNo">No
+                        Preferred:
+                        <br>
+                        <select name="monOpenPref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="tuesOpen" value="yes" checked>Yes
+                        <input type="radio" name="tuesOpen" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="tuesOpenPref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="wensOpen" value="yes" checked>Yes
+                        <input type="radio" name="wensOpen" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="wensOpenPref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="thurOpen" value="yes" checked>Yes
+                        <input type="radio" name="thurOpen" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="thurOpenPref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="friOpen" value="yes" checked>Yes
+                        <input type="radio" name="friOpen" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="friOpenPref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                </tr>
+                <tr>
+                    <th>10:00am - 12:00pm</th>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="mon1012" value="yes" checked>Yes
+                        <input type="radio" name="mon1012" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="mon1012Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="tues1012" value="yes" checked>Yes
+                        <input type="radio" name="tues1012" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="tues1012Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="wens1012" value="yes" checked>Yes
+                        <input type="radio" name="wens1012" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="wens1012Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="thur1012" value="yes" checked>Yes
+                        <input type="radio" name="thur1012" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="thurs1012Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="fri1012" value="yes" checked>Yes
+                        <input type="radio" name="fri1012" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="fri1012Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                </tr>
+                <tr>
+                    <th>12:00pm - 2:00pm</th>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="mon122" value="yes" checked>Yes
+                        <input type="radio" name="mon122" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="mon122Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="tues122" value="yes" checked>Yes
+                        <input type="radio" name="tues122" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="tues122Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="wens122" value="yes" checked>Yes
+                        <input type="radio" name="wens122" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="wens122Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="thur122" value="yes" checked>Yes
+                        <input type="radio" name="thur122" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="thur122Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="fri122" value="yes" checked>Yes
+                        <input type="radio" name="fri122" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="fri122Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                </tr>
+                <tr>
+                    <th>2:00pm - 4:00pm</th>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="mon24" value="yes" checked>Yes
+                        <input type="radio" name="mon24" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="mon24Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="tues24" value="yes" checked>Yes
+                        <input type="radio" name="tues24" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="tues24Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="wens24" value="yes" checked>Yes
+                        <input type="radio" name="wens24" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="wens24Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="thur24" value="yes" checked>Yes
+                        <input type="radio" name="thur24" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="thurs24Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="fri24" value="yes" checked>Yes
+                        <input type="radio" name="fri24" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="fri24Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                </tr>
+                <tr>
+                    <th>4:00pm - 6:00pm</th>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="mon46" value="yes" checked>Yes
+                        <input type="radio" name="mon46" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="mon46Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="tues46" value="yes" checked>Yes
+                        <input type="radio" name="tues46" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="tues46Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="wens46" value="yes" checked>Yes
+                        <input type="radio" name="wens46" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="wens46Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="thur46" value="yes" checked>Yes
+                        <input type="radio" name="thur46" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="thur46Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="fri46" value="yes" checked>Yes
+                        <input type="radio" name="fri46" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="fri46Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                </tr>
+                <tr>
+                    <th>6:00pm - 8:00pm</th>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="mon68" value="yes" checked>Yes
+                        <input type="radio" name="mon68" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="mon68Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="tues68" value="yes" checked>Yes
+                        <input type="radio" name="tues68" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="tues68Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="wens68" value="yes" checked>Yes
+                        <input type="radio" name="wens68" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="wens68Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="thur68" value="yes" checked>Yes
+                        <input type="radio" name="thur68" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="thur68Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="fri68" value="yes" checked>Yes
+                        <input type="radio" name="fri68" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="fri68Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                </tr>
+                <tr>
+                    <th>8:00pm - 10:00pm</th>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="mon810" value="yes" checked>Yes
+                        <input type="radio" name="mon810" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="mon810Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="tues810" value="yes" checked>Yes
+                        <input type="radio" name="tues810" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="tues810Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="wens810" value="yes" checked>Yes
+                        <input type="radio" name="wens810" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="wens810Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="thur810" value="yes" checked>Yes
+                        <input type="radio" name="thur810" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="thur810Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="fri810" value="yes" checked>Yes
+                        <input type="radio" name="fri810" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="fri810Pref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                </tr>
+                <tr>
+                    <th>10:00pm - 12:00am</th>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="monClose" value="yes" checked>Yes
+                        <input type="radio" name="monClose" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="monClosePref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="tuesClose" value="yes" checked>Yes
+                        <input type="radio" name="tuesClose" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="tuesClosePref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="wensClose" value="yes" checked>Yes
+                        <input type="radio" name="wensClose" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="wensClosePref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="thurClose" value="yes" checked>Yes
+                        <input type="radio" name="thurClose" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="thurClosePref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                    <td><center>
+                        Available?
+                        <br>
+                        <input type="radio" name="friClose" value="yes" checked>Yes
+                        <input type="radio" name="friClose" value="no">No
+                        <br>
+                        Preferred:
+                        <br>
+                        <select name="friClosePref">
+                         <option value="neither">No Preference</option>
+                         <option value="yes">Yes</option>
+                         <option value="no">No</opton>
+                        </select>
+                    </center></td>
+                </tr>
+            </table>
+            <br>
+            <hr>
+            <br>
+            <p><input type='submit' name='form-submit' value='Submit'/></p>
+        </form>
+    </body>
+</html>
+
