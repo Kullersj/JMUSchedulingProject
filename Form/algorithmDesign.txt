@@ -1,0 +1,71 @@
+"""
+Version: 12/30/2014, v1.0
+Author: Justin Conner
+
+Per Student Employee:
+	Back2Back		- Boolean
+	BothLocations	- Boolean
+	Pref Location	- String ("Showker" / "Hillside")
+
+	40 Per Person:
+	Available 		- Boolean
+	Preference 		- String ("Yes" "No" "Neither")
+		
+	(fName_lName: ())
+		
+Dictionary:
+	{(Person1 : ()), (Person2 : ), (Person3 : )}
+		
+
+Per Each Work Time:
+
+
+- Car or not?
+- On campus or off
+- ACtual Schedule
+- Why you cant work certain times? (non-class conflicts)
+- 2nd job = only 10 hour max per week
+- 
+
+
+
+"""
+#--------------------------------------------------------------
+
+class employee(object):
+	def __init__(self, line):
+		info = line.split(",")
+		self.fname = info[0]
+		self.lname = info[1]
+		self.back2back = info[2]
+		self.bothLocations = info[3]
+		self.prefLocation = info[4]
+		self.avail = ()
+		self.pref = ()
+		self.sched = ()
+		self.numShifts = len(self.sched)
+
+
+		
+class schedule(object):
+	def __init__(self):
+		self.mon = ()
+		self.tues = ()
+		self.wednes = ()
+		self.thurs = ()
+		self.fri = ()
+		self.curr = 
+	
+	def checkLastShift(self):
+		
+	
+def main():
+	
+	
+if __name__ == "__main__":
+	main()
+
+#----------------------------------------------------------------
+		
+
+	
