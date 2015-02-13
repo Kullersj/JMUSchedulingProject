@@ -24,36 +24,35 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $filters = array
             (
-            "class" => array(
-                "subject" => FILTER_SANITIZE_STRING,
-                "num" => FILTER_VALIDATE_INT,
-                "prof" => FILTER_SANITIZE_STRING,
-                "loc" => FILTER_SANITIZE_STRING,
-                "start" => FILTER_SANITIZE_STRING,
-                "end" => FILTER_SANITIZE_STRING 
-                )
-            
-        );
-        $result = filter_input_array(INPUT_POST, $filters);
-        $class = $result['class'];
-        foreach($class as $class){
-            $subject = test_input($class['subject']);
-            $num = test_input($class['num']);
-            $prof = test_input($class['prof']);
-            $loc = test_input($class['loc']);
-            $start = test_input($class['start']);
-            $end = test_input($class['end']);
-            
-            $sql = "INSERT INTO class_schedule (eID, subject, number, professor,
-                        location, start_time, end_time)
-                        VALUES ($jac, '$subject', '$num', $prof, 
-                        '$loc', '$start', '$end')";
-            if ($conn->query($sql) === TRUE) {
-                $_SESSION["jac"] = $jac;
-                //header("Location: classSchedule.php");
-                echo "Record created successfully";
-            } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
+            "subject" => FILTER_SANITIZE_STRING,
+            "num" => FILTER_VALIDATE_INT,
+            "prof" => FILTER_SANITIZE_STRING,
+            "loc" => FILTER_SANITIZE_STRING,
+            "start" => FILTER_SANITIZE_STRING,
+            "end" => FILTER_SANITIZE_STRING 
+            );
+        if (is_array($_POST['class'])){
+            $classes = $_POST['class'];
+            foreach($classes as $class){
+                $result = filter_var_array($class, $filters);
+                $subject = test_input($result['subject']);
+                $num = test_input($result['num']);
+                $prof = test_input($result['prof']);
+                $loc = test_input($result['loc']);
+                $start = test_input($result['start']);
+                $end = test_input($result['end']);
+
+                $sql = "INSERT INTO class_schedule (eID, subject, number, professor,
+                            location, start_time, end_time)
+                            VALUES ($jac, '$subject', $num, '$prof', 
+                            '$loc', '$start', '$end')";
+                if ($conn->query($sql) === TRUE) {
+                    $_SESSION["jac"] = $jac;
+                    //header("Location: classSchedule.php");
+                    echo "Record created successfully";
+                } else {
+                    echo "Error: " . $sql . "<br>" . $conn->error;
+                }
             }
             $conn->close();
         }
@@ -80,12 +79,12 @@
                     <td>End Time</td>
                 </tr>
                 <tr>
-                    <td><input type="text" name="class[1][subject]" id="subject" placeholder="Subject" value="<?php echo $subject; ?>" size=10/></td>
-                    <td><input type="text" name="class[1][num]" id="num" placeholder="Class Number" value="<?php echo $num; ?>" size=10/></td>
-                    <td><input type="text" name="class[1][prof]" id="prof" placeholder="Professor" value="<?php echo $prof; ?>" size=10/></td>
-                    <td><input type="text" name="class[1][loc]" id="loc" placeholder="Class Location" value="<?php echo $loc; ?>" size=10/></td>
-                    <td><input type="time" name="class[1][start]" id="start" placeholder="Start Time" value="<?php echo $start; ?>" size=10/></td>
-                    <td><input type="time" name="class[1][end]" id="end" placeholder="End Time" value="<?php echo $end; ?>" size=10/></td>
+                    <td><input type="text" name="class[1][subject]" id="subject" placeholder="Subject" size=10/></td>
+                    <td><input type="text" name="class[1][num]" id="num" placeholder="Class Number" size=10/></td>
+                    <td><input type="text" name="class[1][prof]" id="prof" placeholder="Professor" size=10/></td>
+                    <td><input type="text" name="class[1][loc]" id="loc" placeholder="Class Location" size=10/></td>
+                    <td><input type="time" name="class[1][start]" id="start" placeholder="Start Time" size=10/></td>
+                    <td><input type="time" name="class[1][end]" id="end" placeholder="End Time" size=10/></td>
                     <td><input type="button" id="addClass" value="Add Class" onclick="insRow()" size=10/></td>
                     <td><input type="button" id="delClass" value="Delete Class" onclick="deleteRow(this)" size=10/></td>       
                 </tr>
