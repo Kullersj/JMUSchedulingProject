@@ -23,5 +23,17 @@ function insRow() {
     var inp2 = new_row.cells[2].getElementsByTagName('input')[0];
     inp2.id += len;
     inp2.value = '';
+    var inp3 = new_row.cells[3].getElementsByTagName('input')[0];
+    inp3.id += len;
+    inp3.value = '';
+    var inp4 = new_row.cells[4].getElementsByTagName('input')[0];
+    inp4.id += len;
+    inp4.value = '';
+    var inp5 = new_row.cells[5].getElementsByTagName('input')[0];
+    inp5.id += len;
+    inp5.value = '';
+    var inp6 = new_row.cells[6].getElementsByTagName('input')[0];
+    inp6.id += len;
+    inp6.value = '';
     x.appendChild(new_row);
 }
