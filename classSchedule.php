@@ -2,7 +2,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Class Schedule Form</title>
-        <link rel="stylesheet" href="css\main.css">
+        <link rel="stylesheet" href="css\classSchedule.css">
         <style type="text/css">
             #Text1
             {
@@ -29,7 +29,7 @@
             "prof" => FILTER_SANITIZE_STRING,
             "loc" => FILTER_SANITIZE_STRING,
             "start" => FILTER_SANITIZE_STRING,
-            "end" => FILTER_SANITIZE_STRING 
+            "end" => FILTER_SANITIZE_STRING
             );
         if (is_array($_POST['class'])){
             $classes = $_POST['class'];
@@ -41,11 +41,19 @@
                 $loc = test_input($result['loc']);
                 $start = test_input($result['start']);
                 $end = test_input($result['end']);
+                $days = $class['day'];
+                $classDays = "";
+                foreach($days as $day){
+                    $classDays .= $day;
+                    if(!($day === end($days))){
+                        $classDays .= ",";
+                    }
+                }
 
                 $sql = "INSERT INTO class_schedule (eID, subject, number, professor,
-                            location, start_time, end_time)
+                            location, start_time, end_time, class_days)
                             VALUES ($jac, '$subject', $num, '$prof', 
-                            '$loc', '$start', '$end')";
+                            '$loc', '$start', '$end', '$classDays')";
                 if ($conn->query($sql) === TRUE) {
                     $_SESSION["jac"] = $jac;
                     //header("Location: classSchedule.php");
@@ -77,6 +85,17 @@
                     <td>Class Location</td>
                     <td>Start Time</td>
                     <td>End Time</td>
+                    <td>Class Days</td>
+                </tr>
+                <tr>
+                    <td>MATH</td>
+                    <td>220</td>
+                    <td>Dr. Professor</td>
+                    <td>Miller 0001</td>
+                    <td>12:30 PM</td>
+                    <td>1:45 PM</td>
+                    <td></td>
+                    <td><input type="button" id="addClass" value="Add Class" onclick="insRow()" size=10/></td>
                 </tr>
                 <tr>
                     <td><input type="text" name="class[1][subject]" id="subject" placeholder="Subject" size=10/></td>
@@ -85,8 +104,20 @@
                     <td><input type="text" name="class[1][loc]" id="loc" placeholder="Class Location" size=10/></td>
                     <td><input type="time" name="class[1][start]" id="start" placeholder="Start Time" size=10/></td>
                     <td><input type="time" name="class[1][end]" id="end" placeholder="End Time" size=10/></td>
+                    <td>
+                        <p class="days">M T W Th F</p>
+                        <p class="boxes">
+                        <input type="checkbox" name="class[1][day][m]" id="mon" size=10 value="mon"/>
+                        <input type="checkbox" name="class[1][day][t]" id="tue" size=10 value="tue"/>
+                        <input type="checkbox" name="class[1][day][w]" id="wed" size=10 value="wed"/>
+                        <input type="checkbox" name="class[1][day][th]" id="thu" size=10 value="thu"/>
+                        <input type="checkbox" name="class[1][day][f]" id="fri" size=10 value="fri"/>
+                        </p>
+                    </td>
+                    <p class="buttons">
                     <td><input type="button" id="addClass" value="Add Class" onclick="insRow()" size=10/></td>
-                    <td><input type="button" id="delClass" value="Delete Class" onclick="deleteRow(this)" size=10/></td>       
+                    <td><input type="button" id="delClass" value="Delete Class" onclick="deleteRow(this)" size=10/></td>
+                    </p>
                 </tr>
             </table>
             <p><input type='submit' value='Continue'/></p>
