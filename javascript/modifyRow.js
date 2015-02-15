@@ -72,5 +72,10 @@ function insRow() {
     inp10.name = "class[" + len + "][day][f]";
     inp10.checked = false;
     
+    var delButton = new_row.cells[8].getElementsByTagName('input')[0];
+    delButton.onclick = function() { deleteRow(this); };
+    delButton.value = "Delete Class";
+    
+    
     x.appendChild(new_row);
 }
