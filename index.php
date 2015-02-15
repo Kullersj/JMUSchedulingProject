@@ -37,17 +37,18 @@ and open the template in the editor.
                 $filters = array
                 (
                     "jac" => FILTER_VALIDATE_INT,
-                    "fname" => FILTER_SANTIZE_STRING,
-                    "lname" => FILTER_SANTIZE_STRING,
+                    "fname" => FILTER_SANITIZE_STRING,
+                    "lname" => FILTER_SANITIZE_STRING,
                     "phone" => FILTER_VALIDATE_INT,
-                    "email" => FITLER_VALIDATE_EMAIL,
-                    "address" => FILTER_SANTIZE_STRING,
+                    "email" => FILTER_VALIDATE_EMAIL,
+                    "address" => FILTER_SANITIZE_STRING,
                     "back2back" => FILTER_VALIDATE_BOOLEAN,
                     "bothlocation" => FILTER_VALIDATE_BOOLEAN,
-                    "location" => FILTER_SANTIZE_STRING
+                    "location" => FILTER_SANITIZE_STRING,
+                    "onCampus" => FILTER_VALIDATE_BOOLEAN
                 );
                 $result = filter_input_array(INPUT_POST, $filters);
-                $fname = test_input($reult["fname"]);
+                $fname = test_input($result["fname"]);
                 $lname = test_input($result["lname"]);
                 $phone = test_input($result["phone"]);
                 $address = test_input($result["address"]);
@@ -57,6 +58,30 @@ and open the template in the editor.
                 $location = test_input($result["location"]);
                 $onCampus = test_input($result["onCampus"]);
 		$email = test_input($result["email"]);
+                
+                if ($onCampus === ""){
+                    $onCampus = 0;
+                }
+                if ($back2back === ""){
+                    $back2back = 0;
+                }
+                
+                if($bothlocation === ""){
+                    $bothlocation = 0;
+                }
+                
+                $sql = "INSERT INTO employee (eID, first, last, phone, email,
+                        local_address, location, onCampus, back_to_back, both_labs)
+                        VALUES ($jac, '$fname', '$lname', $phone, '$email', '$address',
+                        '$location', $onCampus, $back2back, $bothlocation)";
+                if ($conn->query($sql) === TRUE) {
+                    $_SESSION["jac"] = $jac;
+                    echo "Record created successfully";
+                    header("Location: classSchedule.php");
+                } else {
+                    echo "Error: " . $sql . "<br>" . $conn->error;
+                }
+                $conn->close();
             }
             
             function test_input($data) {
@@ -98,41 +123,5 @@ and open the template in the editor.
             </select></br></br></br>
             <p><input type='submit' name='submit' value='Continue'/></p>
         </form>
-        <?php
-        
-	    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                if ($onCampus == "yes") {
-                    $onCampus = 1;
-                }
-                else {
-                    $onCampus = 0;
-                }
-                if ($back2back == "yes") {
-                    $back2back = 1;
-                }
-                else {
-                    $back2back = 0;
-                }
-                if ($bothlocation == "yes") {
-                    $bothlocation = 1;
-                }
-                else {
-                    $bothlocation = 0;
-                }
-                
-                $sql = "INSERT INTO employee (eID, first, last, phone, email,
-                        local_address, location, onCampus, back_to_back, both_labs)
-                        VALUES ($jac, '$fname', '$lname', $phone, '$email', '$address',
-                        '$location', $onCampus, $back2back, $bothlocation)";
-                if ($conn->query($sql) === TRUE) {
-                    $_SESSION["jac"] = $jac;
-                    header("Location: classSchedule.php");
-                    echo "Record created successfully";
-                } else {
-                    echo "Error: " . $sql . "<br>" . $conn->error;
-                }
-                $conn->close();
-	    }        
-	?>
     </body>
 </html>

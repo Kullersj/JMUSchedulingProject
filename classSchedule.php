@@ -41,25 +41,26 @@
                 $loc = test_input($result['loc']);
                 $start = test_input($result['start']);
                 $end = test_input($result['end']);
-                $days = $class['day'];
-                $classDays = "";
-                foreach($days as $day){
-                    $classDays .= $day;
-                    if(!($day === end($days))){
-                        $classDays .= ",";
+                if (!($subject === "" || $number === "")){
+                    $days = $class['day'];
+                    $classDays = "";
+                    foreach($days as $day){
+                        $classDays .= $day;
+                        if(!($day === end($days))){
+                            $classDays .= ",";
+                        }
                     }
-                }
-
-                $sql = "INSERT INTO class_schedule (eID, subject, number, professor,
-                            location, start_time, end_time, class_days)
-                            VALUES ($jac, '$subject', $num, '$prof', 
-                            '$loc', '$start', '$end', '$classDays')";
-                if ($conn->query($sql) === TRUE) {
-                    $_SESSION["jac"] = $jac;
-                    //header("Location: classSchedule.php");
-                    echo "Record created successfully";
-                } else {
-                    echo "Error: " . $sql . "<br>" . $conn->error;
+                    $sql = "INSERT INTO class_schedule (eID, subject, number, professor,
+                                location, start_time, end_time, class_days)
+                                VALUES ($jac, '$subject', $num, '$prof', 
+                                '$loc', '$start', '$end', '$classDays')";
+                    if ($conn->query($sql) === TRUE) {
+                        $_SESSION["jac"] = $jac;
+                        //header("Location: classSchedule.php");
+                        echo "Record created successfully";
+                    } else {
+                        echo "Error: " . $sql . "<br>" . $conn->error;
+                    }
                 }
             }
             $conn->close();
@@ -95,7 +96,6 @@
                     <td>12:30 PM</td>
                     <td>1:45 PM</td>
                     <td></td>
-                    <td><input type="button" id="addClass" value="Add Class" onclick="insRow()" size=10/></td>
                 </tr>
                 <tr>
                     <td><input type="text" name="class[1][subject]" id="subject" placeholder="Subject" size=10/></td>
@@ -116,7 +116,7 @@
                     </td>
                     <p class="buttons">
                     <td><input type="button" id="addClass" value="Add Class" onclick="insRow()" size=10/></td>
-                    <td><input type="button" id="delClass" value="Delete Class" onclick="deleteRow(this)" size=10/></td>
+                    <td><input type="button" id="delClass" value="Add Class" onclick="insRow()" size=10/></td>
                     </p>
                 </tr>
             </table>
