@@ -52,7 +52,7 @@
                     }
                     $sql = "INSERT INTO class_schedule (eID, subject, number, professor,
                                 location, start_time, end_time, class_days)
-                                VALUES ($jac, '$subject', $num, '$prof', 
+                                VALUES ($jac, '$subject.toUpperCase()', $num, '$prof', 
                                 '$loc', '$start', '$end', '$classDays')";
                     if ($conn->query($sql) === TRUE) {
                         $_SESSION["jac"] = $jac;
@@ -64,6 +64,7 @@
                 }
             }
             $conn->close();
+            header("Location: workTimes.php");
         }
     }
 
@@ -120,7 +121,7 @@
                     </p>
                 </tr>
             </table>
-            <p><input type='submit' value='Continue'/></p>
+            <center><p><input type='submit' value='Continue'/></p></center>
         </form>
         <script language="JavaScript" src="javascript/modifyRow.js" type="text/javascript"></script>
     </body>

@@ -91,7 +91,7 @@ function insRow() {
     delButton.onclick = function() { deleteRow(this); };
     delButton.value = "Delete Class";
     delButton.name = "deleteClass";
-  
+    
     
     x.appendChild(new_row);
 }
