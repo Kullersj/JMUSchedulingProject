@@ -7,15 +7,30 @@
 
 function deleteRow(row) {
     var i = row.parentNode.parentNode.rowIndex;
-    document.getElementById('ClassTable').deleteRow(i);
+    var x = document.getElementById('ClassTable');
+    x.deleteRow(i);
+    if (x.rows.length === 3){
+        var firstDelete = x.rows[2].cells[8].getElementsByTagName('input')[0];
+        firstDelete.parentNode.removeChild(firstDelete);
+    }
 }
 
 
 function insRow() {
     console.log('hi');
     var x = document.getElementById('ClassTable');
-    var new_row = x.rows[2].cloneNode(true);
     var len = x.rows.length;
+    
+    if (len === 3){
+        var firstRowDelete = x.rows[2].cells[8];
+        var newButton = document.createElement("input");
+        newButton.type = "button";
+        newButton.onclick = function() { deleteRow(this); };
+        newButton.value = "Delete Class";
+        newButton.name = "deleteClass";
+        firstRowDelete.appendChild(newButton);
+    }
+    var new_row = x.rows[2].cloneNode(true);
 
     var inp0 = new_row.cells[0].getElementsByTagName('input')[0];
     inp0.id += len;
@@ -75,7 +90,8 @@ function insRow() {
     var delButton = new_row.cells[8].getElementsByTagName('input')[0];
     delButton.onclick = function() { deleteRow(this); };
     delButton.value = "Delete Class";
-    
+    delButton.name = "deleteClass";
+  
     
     x.appendChild(new_row);
 }
