@@ -12,8 +12,11 @@
     </head>
     <?php
     session_start();
-    //$jac = $_SESSION['jac'];
-    $jac = 1234;
+    $jac = NULL;
+    $jac = $_SESSION['jac'];
+    if ($jac === NULL){
+        $jac = 1234;
+    }
     $servername = $_SESSION['servername'];
     $username = $_SESSION['username'];
     $password = $_SESSION['password'];
