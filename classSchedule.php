@@ -116,7 +116,7 @@
                     </td>
                     <p class="buttons">
                     <td><input type="button" id="addClass" value="Add Class" onclick="insRow()" size=10/></td>
-                    <td><input type="button" id="delClass" value="Add Class" onclick="insRow()" size=10/></td>
+                    <td></td>
                     </p>
                 </tr>
             </table>
