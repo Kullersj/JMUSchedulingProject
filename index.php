@@ -51,6 +51,7 @@ and open the template in the editor.
                 $fname = test_input($result["fname"]);
                 $lname = test_input($result["lname"]);
                 $phone = test_input($result["phone"]);
+                $phone = preg_replace('/\D+/', '', $phone);
                 $address = test_input($result["address"]);
                 $jac = test_input($result["jac"]);
                 $back2back = test_input($result["back2back"]);

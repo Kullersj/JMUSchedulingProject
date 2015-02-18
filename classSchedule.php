@@ -28,7 +28,7 @@
         $filters = array
             (
             "subject" => FILTER_SANITIZE_STRING,
-            "num" => FILTER_VALIDATE_INT,
+            "num" => FILTER_SANITIZE_STRING,
             "prof" => FILTER_SANITIZE_STRING,
             "loc" => FILTER_SANITIZE_STRING,
             "start" => FILTER_SANITIZE_STRING,
