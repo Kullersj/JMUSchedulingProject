@@ -101,11 +101,11 @@ and open the template in the editor.
 
         <form id='employeeinfo' method='post' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" >
             <h5>Employee Information:  </h5>
+            <input type="text" name="jac" placeholder="JAC Number" style="margin-left: 30px;" value="<?php echo $jac;?>" /></br>
             <input type="text" name="fname" placeholder="First Name" style="margin-left: 30px;" value="<?php echo $fname;?>"/></br>
             <input type="text" name="lname" placeholder="Last Name" style="margin-left: 30px;" value="<?php echo $lname;?>"/></br>
             <input type="text" name="phone" placeholder="Phone" style="margin-left: 30px;" value="<?php echo $phone;?>"/></br>
             <input type="text" name="address" placeholder="Address" style="margin-left: 30px;" value="<?php echo $address;?>"/></br>
-            <input type="text" name="jac" placeholder="JAC Number" style="margin-left: 30px;" value="<?php echo $jac;?>" /></br>
 	    <input type="text" name="email" placeholder="Email" style="margin-left: 30px;" value="<?php echo $email;?>" /></br>
             <h5>Do you live on Campus?  </h5>
             <p><input type="radio" name="onCampus" style="margin-left: 34px" value="yes"/>Yes</p>
