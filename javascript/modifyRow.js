@@ -19,6 +19,7 @@ function deleteRow(row) {
 function insRow() {
     console.log('hi');
     var x = document.getElementById('ClassTable');
+    var tbody = document.getElementById('tbody');
     var len = x.rows.length;
     
     if (len === 3){
@@ -93,5 +94,5 @@ function insRow() {
     delButton.name = "deleteClass";
     
     
-    x.appendChild(new_row);
+    tbody.appendChild(new_row);
 }
