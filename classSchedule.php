@@ -12,12 +12,13 @@
     </head>
     <?php
     session_start();
-    if (isset($_SESSION['jac'])){
+    if (isset($_POST['jac'])){
+        $jac = $_POST['jac'];
+    }
+    else if (isset($_SESSION['jac'])){
         $jac = $_SESSION['jac'];
     }
-    else {
-        $jac = 1234;
-    }
+    
     $servername = $_SESSION['servername'];
     $username = $_SESSION['username'];
     $password = $_SESSION['password'];
@@ -54,9 +55,12 @@
                             $classDays .= ",";
                         }
                     }
+                    
+                    $subject = strtoupper($subject);
+    
                     $sql = "INSERT INTO class_schedule (eID, subject, number, professor,
                                 location, start_time, end_time, class_days)
-                                VALUES ($jac, '$subject.toUpperCase()', $num, '$prof', 
+                                VALUES ($jac, '$subject', '$num', '$prof', 
                                 '$loc', '$start', '$end', '$classDays')";
                     if ($conn->query($sql) === TRUE) {
                         $_SESSION["jac"] = $jac;
@@ -82,8 +86,12 @@
     <body>
         <img src="img/dukes.png" style="width:225px;height:200px">
         <h1><center>JMU Scheduling Form</center></h1>
-        If a class meets at multiple times during the week please add each time as a separate class
+        If a class meets at multiple times during the week please add each time as a separate class.<br>
+        If the Subject or Class Number is left empty then the class will not be counted.<br>
+        Your eID is: <b><?php echo $jac?></b>
         <form id='classSchedule' method='post' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" >
+            If the eID is wrong input yours here
+            <input type="text" name="jac" placeholder="JAC Number" style="margin-left: 30px;" value="<?php echo $jac;?>" /> <br>
             <table id="ClassTable">
                 <thead>
                     <tr>
