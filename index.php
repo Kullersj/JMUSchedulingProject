@@ -77,7 +77,7 @@ and open the template in the editor.
                         "jac" => FILTER_VALIDATE_INT,
                         "fname" => FILTER_SANITIZE_STRING,
                         "lname" => FILTER_SANITIZE_STRING,
-                        "phone" => FILTER_VALIDATE_INT,
+                        "phone" => FILTER_SANITIZE_STRING,
                         "email" => FILTER_VALIDATE_EMAIL,
                         "address" => FILTER_SANITIZE_STRING,
                         "back2back" => FILTER_VALIDATE_BOOLEAN,
@@ -97,30 +97,57 @@ and open the template in the editor.
                     $location = test_input($result["location"]);
                     $onCampus = test_input($result["onCampus"]);
                     $email = test_input($result["email"]);
+                    
+                    if ($jac !== "" && strlen((string)$jac) === 9){
 
-                    if ($onCampus === ""){
-                        $onCampus = 0;
-                    }
-                    if ($back2back === ""){
-                        $back2back = 0;
-                    }
+                        if ($onCampus === ""){
+                            $onCampus = 0;
+                        }
+                        if ($back2back === ""){
+                            $back2back = 0;
+                        }
 
-                    if($bothlocation === ""){
-                        $bothlocation = 0;
+                        if($bothlocation === ""){
+                            $bothlocation = 0;
+                        }
+                        
+                        $jacsql = "SELECT eID FROM employee WHERE eID = '$jac'";
+                        $result = ($conn->query($jacsql));
+                        if($result->num_rows > 0) {
+                            $sql = "UPDATE employee
+                                   SET first='$fname', last='$lname', phone ='$phone',"
+                                    . "email='$email', local_address='$address', "
+                                    . "location='$location', "
+                                    . "onCampus=$onCampus, back_to_back=$back2back, "
+                                    . "both_labs=$bothlocation "
+                                    . "WHERE eID=$jac;";
+                            if ($conn->query($sql) === TRUE) {
+                                $_SESSION["jac"] = $jac;
+                                echo "Record updated successfully";
+                                header("Location: classSchedule.php");
+                            } else {
+                                echo "Error: " . $sql . "<br>" . $conn->error;
+                            }
+                        }
+                        else {
+                            $sql = "INSERT INTO employee (eID, first, last, phone, email,
+                                    local_address, location, onCampus, back_to_back, both_labs)
+                                    VALUES ($jac, '$fname', '$lname', $phone, '$email', '$address',
+                                    '$location', $onCampus, $back2back, $bothlocation)";
+                            if ($conn->query($sql) === TRUE) {
+                                $_SESSION["jac"] = $jac;
+                                echo "Record created successfully";
+                                header("Location: classSchedule.php");
+                            } else {
+                                echo "Error: " . $sql . "<br>" . $conn->error;
+                            }
+                        }
+                        $conn->close();
+                        
                     }
-
-                    $sql = "INSERT INTO employee (eID, first, last, phone, email,
-                            local_address, location, onCampus, back_to_back, both_labs)
-                            VALUES ($jac, '$fname', '$lname', $phone, '$email', '$address',
-                            '$location', $onCampus, $back2back, $bothlocation)";
-                    if ($conn->query($sql) === TRUE) {
-                        $_SESSION["jac"] = $jac;
-                        echo "Record created successfully";
-                        header("Location: classSchedule.php");
-                    } else {
-                        echo "Error: " . $sql . "<br>" . $conn->error;
+                    else {
+                        $jacErr = "Invalid eID";
                     }
-                    $conn->close();
                 }                       
             }
             
