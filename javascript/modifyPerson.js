@@ -7,7 +7,7 @@
 
 function deleteRow(row) {
     var i = row.parentNode.parentNode.rowIndex;
-    var x = document.getElementById('employees');
+    var x = document.getElementById('employeeTable');
     x.deleteRow(i);
     if (x.rows.length === 1){
         var firstDelete = x.rows[0].cells[2].getElementsByTagName('input')[0];
@@ -16,7 +16,7 @@ function deleteRow(row) {
 }
 
 function insPerson() {
-    var x = document.getElementById('employees');
+    var x = document.getElementById('employeeTable');
     var tbody = document.getElementById('tbody');
     var len = x.rows.length;
     

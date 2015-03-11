@@ -7,7 +7,7 @@
         <title>
             managerPage
         </title>
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/classSchedule.css">
         <style type="text/css">
             #Text1
             {
@@ -73,12 +73,14 @@
                         <table summary="">
                             <tr>
                                 <td>
-                                    M T W Th F<br>
-                                    <input type="checkbox" name="mon" value="mon" id="mon"/>
-                                    <input type="checkbox" name="tue" value="tue" id="tue"/>
-                                    <input type="checkbox" name="wed" value="wed" id="wed"/>
-                                    <input type="checkbox" name="thr" value="thr" id="thr"/>
-                                    <input type="checkbox" name="fri" value="fri" id="fri"/>
+                                    <p class="days">M T W Th F</p>
+                                    <p class="boxes">
+                                    <input type="checkbox" name="day[Monday]" value="mon" id="mon"/>
+                                    <input type="checkbox" name="day[Tuesday]" value="tue" id="tue"/>
+                                    <input type="checkbox" name="day[Wednesday]" value="wed" id="wed"/>
+                                    <input type="checkbox" name="day[Thursday]" value="thu" id="thr"/>
+                                    <input type="checkbox" name="day[Friday]" value="fri" id="fri"/>
+                                    </p>
                                 </td>
                             </tr>
                             <tr>
