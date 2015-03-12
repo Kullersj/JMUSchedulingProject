@@ -29,7 +29,6 @@ and open the template in the editor.
             $_SESSION["password"] = $password;
             $_SESSION["dbname"] = $dbname;
             
-
             // Create connection
             $conn = new mysqli($servername, $username, $password, $dbname);
             // define variables and set to empty values
