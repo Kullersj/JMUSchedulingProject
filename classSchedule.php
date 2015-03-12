@@ -46,18 +46,40 @@
                 $start = test_input($result['start']);
                 $end = test_input($result['end']);
                 if (!($subject === "" || $number === "")){
-                    $days = $class['day'];
-                    $classDays = "";
-                    foreach($days as $day){
-                        $classDays .= $day;
-                        if(!($day === end($days))){
-                            $classDays .= ",";
-                        }
+                    if (!ISSET($class['m'])){
+                        $mon = 0;
+                    }
+                    else{
+                        $mon = $class['m'];
+                    }
+                    if (!ISSET($class['t'])){
+                        $tue = 0;
+                    }
+                    else{
+                        $tue = $class['t'];
+                    }
+                    if (!ISSET($class['w'])){
+                        $wed = 0;
+                    }
+                    else{
+                        $wed = $class['w'];
+                    }
+                    if (!ISSET($class['th'])){
+                        $thu = 0;
+                    }
+                    else{
+                        $thu = $class['th'];
+                    }
+                    if (!ISSET($class['f'])){
+                        $fri = 0;
+                    }
+                    else{
+                        $fri = $class['f'];
                     }
                     $sql = "INSERT INTO class_schedule (eID, subject, number, professor,
-                                location, start_time, end_time, class_days)
+                                location, start_time, end_time, mon, tue, wed, thu, fri)
                                 VALUES ($jac, '$subject.toUpperCase()', $num, '$prof', 
-                                '$loc', '$start', '$end', '$classDays')";
+                                '$loc', '$start', '$end', $mon, $tue, $wed, $thu, $fri)";
                     if ($conn->query($sql) === TRUE) {
                         $_SESSION["jac"] = $jac;
                         //header("Location: classSchedule.php");
@@ -116,11 +138,11 @@
                         <td>
                             <p class="days">M T W Th F</p>
                             <p class="boxes">
-                            <input type="checkbox" name="class[1][day][m]" id="mon" size=10 value="mon"/>
-                            <input type="checkbox" name="class[1][day][t]" id="tue" size=10 value="tue"/>
-                            <input type="checkbox" name="class[1][day][w]" id="wed" size=10 value="wed"/>
-                            <input type="checkbox" name="class[1][day][th]" id="thu" size=10 value="thu"/>
-                            <input type="checkbox" name="class[1][day][f]" id="fri" size=10 value="fri"/>
+                            <input type="checkbox" name="class[1][m]" id="mon" size=10 value="1"/>
+                            <input type="checkbox" name="class[1][t]" id="tue" size=10 value="1"/>
+                            <input type="checkbox" name="class[1][w]" id="wed" size=10 value="1"/>
+                            <input type="checkbox" name="class[1][th]" id="thu" size=10 value="1"/>
+                            <input type="checkbox" name="class[1][f]" id="fri" size=10 value="1"/>
                             </p>
                         </td>
                         <p class="buttons">
