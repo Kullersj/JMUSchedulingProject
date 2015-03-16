@@ -47,7 +47,7 @@
                 $end12 = test_input($result['end']);
                 $start = date("H:i", strtotime($start12));
                 $end = date("H:i", strtotime($end12));
-                if (!($subject === "" || $number === "")){
+                if (!($subject === "" || $num === "")){
                     if (!ISSET($class['m'])){
                         $mon = 0;
                     }

@@ -73,12 +73,18 @@ and open the template in the editor.
                 <td>7:45 - 10</td>
                 <?php 
                     foreach ($days as $day) {
-                        $sql = "SELECT DISTINCT e.first, e.last FROM employee e "
-                                . "LEFT JOIN `class_schedule` c ON e.eID = c.eID WHERE "
-                                . "c.$day = 0 XOR c.$day = 1 AND NOT "
-                                . "( (c.start_time >= Cast('7:45' AS time) AND c.end_time <= Cast('10:00' AS time)) OR"
-                                . "(c.start_time <= Cast('7:45' AS time) AND c.end_time >= Cast('7:45' AS time)) OR"
-                                . "(c.start_time >= Cast('7:45' AS time) AND c.start_time <= Cast('10:00' AS time))"
+                        $sql = "SELECT first, last from employee "
+                                . "WHERE eID NOT IN "
+                                . "("
+                                    . "SELECT e.eID "
+                                    . "FROM employee e "
+                                    . "LEFT JOIN class_schedule c ON e.eID = c.eID "
+                                    . "where c.$day = 1 AND "
+                                .    "("
+                                        . "(c.start_time >= Cast('7:45' AS time) AND c.end_time <= Cast('10:00' AS time)) OR "
+                                        . "(c.start_time <= Cast('7:45' AS time) AND c.end_time >= Cast('7:45' AS time)) OR "
+                                        . "(c.start_time >= Cast('7:45' AS time) AND c.start_time <= Cast('10:00' AS time))"
+                                    . ")"
                                 . ")";
                         printNames($sql);
                     }
@@ -88,12 +94,18 @@ and open the template in the editor.
                 <td>10 - 12</td>
                 <?php 
                     foreach ($days as $day) {
-                        $sql = "SELECT DISTINCT e.first, e.last FROM employee e "
-                                . "LEFT JOIN `class_schedule` c ON e.eID = c.eID WHERE "
-                                . "c.$day = 0 XOR c.$day = 1 AND NOT "
-                                . "( (c.start_time >= Cast('10:00' AS time) AND c.end_time <= Cast('12:00' AS time)) OR"
-                                . "(c.start_time <= Cast('10:00' AS time) AND c.end_time >= Cast('10:00' AS time)) OR"
-                                . "(c.start_time >= Cast('10:00' AS time) AND c.start_time <= Cast('12:00' AS time))"
+                        $sql = "SELECT first, last from employee "
+                                . "WHERE eID NOT IN "
+                                . "("
+                                    . "SELECT e.eID "
+                                    . "FROM employee e "
+                                    . "LEFT JOIN class_schedule c ON e.eID = c.eID "
+                                    . "where c.$day = 1 AND "
+                                .    "("
+                                        . "(c.start_time >= Cast('10:00' AS time) AND c.end_time <= Cast('12:00' AS time)) OR "
+                                        . "(c.start_time <= Cast('10:00' AS time) AND c.end_time >= Cast('10:00' AS time)) OR "
+                                        . "(c.start_time >= Cast('10:00' AS time) AND c.start_time <= Cast('12:00' AS time))"
+                                    . ")"
                                 . ")";
                                 printNames($sql);
                     }
@@ -103,12 +115,18 @@ and open the template in the editor.
                 <td>12 - 2</td>
                 <?php 
                     foreach ($days as $day) {
-                        $sql = "SELECT DISTINCT e.first, e.last FROM employee e "
-                                . "LEFT JOIN `class_schedule` c ON e.eID = c.eID WHERE "
-                                . "c.$day = 0 XOR c.$day = 1 AND NOT "
-                                . "( (c.start_time >= Cast('12:00' AS time) AND c.end_time <= Cast('14:00' AS time)) OR"
-                                . "(c.start_time <= Cast('12:00' AS time) AND c.end_time >= Cast('12:00' AS time)) OR"
-                                . "(c.start_time >= Cast('12:00' AS time) AND c.start_time <= Cast('14:00' AS time))"
+                        $sql = "SELECT first, last from employee "
+                                . "WHERE eID NOT IN "
+                                . "("
+                                    . "SELECT e.eID "
+                                    . "FROM employee e "
+                                    . "LEFT JOIN class_schedule c ON e.eID = c.eID "
+                                    . "where c.$day = 1 AND "
+                                .    "("
+                                        . "(c.start_time >= Cast('12:00' AS time) AND c.end_time <= Cast('14:00' AS time)) OR "
+                                        . "(c.start_time <= Cast('12:00' AS time) AND c.end_time >= Cast('12:00' AS time)) OR "
+                                        . "(c.start_time >= Cast('12:00' AS time) AND c.start_time <= Cast('14:00' AS time))"
+                                    . ")"
                                 . ")";
                                 printNames($sql);
                     }
@@ -118,12 +136,18 @@ and open the template in the editor.
                 <td>2 - 4</td>
                 <?php 
                     foreach ($days as $day) {
-                        $sql = "SELECT DISTINCT e.first, e.last FROM employee e "
-                                . "LEFT JOIN `class_schedule` c ON e.eID = c.eID WHERE "
-                                . "c.$day = 0 XOR c.$day = 1 AND NOT "
-                                . "( (c.start_time >= Cast('14:00' AS time) AND c.end_time <= Cast('16:00' AS time)) OR"
-                                . "(c.start_time <= Cast('14:00' AS time) AND c.end_time >= Cast('14:00' AS time)) OR"
-                                . "(c.start_time >= Cast('14:00' AS time) AND c.start_time <= Cast('16:00' AS time))"
+                        $sql = "SELECT first, last from employee "
+                                . "WHERE eID NOT IN "
+                                . "("
+                                    . "SELECT e.eID "
+                                    . "FROM employee e "
+                                    . "LEFT JOIN class_schedule c ON e.eID = c.eID "
+                                    . "where c.$day = 1 AND "
+                                .    "("
+                                        . "(c.start_time >= Cast('14:00' AS time) AND c.end_time <= Cast('16:00' AS time)) OR "
+                                        . "(c.start_time <= Cast('14:00' AS time) AND c.end_time >= Cast('14:00' AS time)) OR "
+                                        . "(c.start_time >= Cast('14:00' AS time) AND c.start_time <= Cast('16:00' AS time))"
+                                    . ")"
                                 . ")";
                                 printNames($sql);
                     }
@@ -133,12 +157,18 @@ and open the template in the editor.
                 <td>4 - 6</td>
                 <?php 
                     foreach ($days as $day) {
-                        $sql = "SELECT DISTINCT e.first, e.last FROM employee e "
-                                . "LEFT JOIN `class_schedule` c ON e.eID = c.eID WHERE "
-                                . "c.$day = 0 XOR c.$day = 1 AND NOT "
-                                . "( (c.start_time >= Cast('16:00' AS time) AND c.end_time <= Cast('18:00' AS time)) OR"
-                                . "(c.start_time <= Cast('16:00' AS time) AND c.end_time >= Cast('16:00' AS time)) OR"
-                                . "(c.start_time >= Cast('16:00' AS time) AND c.start_time <= Cast('18:00' AS time))"
+                        $sql = "SELECT first, last from employee "
+                                . "WHERE eID NOT IN "
+                                . "("
+                                    . "SELECT e.eID "
+                                    . "FROM employee e "
+                                    . "LEFT JOIN class_schedule c ON e.eID = c.eID "
+                                    . "where c.$day = 1 AND "
+                                .    "("
+                                        . "(c.start_time >= Cast('16:00' AS time) AND c.end_time <= Cast('18:00' AS time)) OR "
+                                        . "(c.start_time <= Cast('16:00' AS time) AND c.end_time >= Cast('16:00' AS time)) OR "
+                                        . "(c.start_time >= Cast('16:00' AS time) AND c.start_time <= Cast('18:00' AS time))"
+                                    . ")"
                                 . ")";
                                 printNames($sql);
                     }
@@ -148,12 +178,18 @@ and open the template in the editor.
                 <td>6 - 8</td>
                 <?php 
                     foreach ($days as $day) {
-                        $sql = "SELECT DISTINCT e.first, e.last FROM employee e "
-                                . "LEFT JOIN `class_schedule` c ON e.eID = c.eID WHERE "
-                                . "c.$day = 0 XOR c.$day = 1 AND NOT "
-                                . "( (c.start_time >= Cast('18:00' AS time) AND c.end_time <= Cast('20:00' AS time)) OR"
-                                . "(c.start_time <= Cast('18:00' AS time) AND c.end_time >= Cast('18:00' AS time)) OR"
-                                . "(c.start_time >= Cast('18:00' AS time) AND c.start_time <= Cast('20:00' AS time))"
+                        $sql = "SELECT first, last from employee "
+                                . "WHERE eID NOT IN "
+                                . "("
+                                    . "SELECT e.eID "
+                                    . "FROM employee e "
+                                    . "LEFT JOIN class_schedule c ON e.eID = c.eID "
+                                    . "where c.$day = 1 AND "
+                                .    "("
+                                        . "(c.start_time >= Cast('18:00' AS time) AND c.end_time <= Cast('20:00' AS time)) OR "
+                                        . "(c.start_time <= Cast('18:00' AS time) AND c.end_time >= Cast('18:00' AS time)) OR "
+                                        . "(c.start_time >= Cast('18:00' AS time) AND c.start_time <= Cast('20:00' AS time))"
+                                    . ")"
                                 . ")";
                                 printNames($sql);
                     }
@@ -163,12 +199,18 @@ and open the template in the editor.
                 <td>8 - 10</td>
                 <?php 
                     foreach ($days as $day) {
-                        $sql = "SELECT DISTINCT e.first, e.last FROM employee e "
-                                . "LEFT JOIN `class_schedule` c ON e.eID = c.eID WHERE "
-                                . "c.$day = 0 XOR c.$day = 1 AND NOT "
-                                . "( (c.start_time >= Cast('20:00' AS time) AND c.end_time <= Cast('22:00' AS time)) OR"
-                                . "(c.start_time <= Cast('20:00' AS time) AND c.end_time >= Cast('20:00' AS time)) OR"
-                                . "(c.start_time >= Cast('20:00' AS time) AND c.start_time <= Cast('22:00' AS time))"
+                        $sql = "SELECT first, last from employee "
+                                . "WHERE eID NOT IN "
+                                . "("
+                                    . "SELECT e.eID "
+                                    . "FROM employee e "
+                                    . "LEFT JOIN class_schedule c ON e.eID = c.eID "
+                                    . "where c.$day = 1 AND "
+                                .    "("
+                                        . "(c.start_time >= Cast('20:00' AS time) AND c.end_time <= Cast('22:00' AS time)) OR "
+                                        . "(c.start_time <= Cast('20:00' AS time) AND c.end_time >= Cast('20:00' AS time)) OR "
+                                        . "(c.start_time >= Cast('20:00' AS time) AND c.start_time <= Cast('22:00' AS time))"
+                                    . ")"
                                 . ")";
                                 printNames($sql);
                     }
@@ -178,12 +220,18 @@ and open the template in the editor.
                 <td>10 - 12:15</td>
                 <?php 
                     foreach ($days as $day) {
-                        $sql = "SELECT DISTINCT e.first, e.last FROM employee e "
-                                . "LEFT JOIN `class_schedule` c ON e.eID = c.eID WHERE "
-                                . "c.$day = 0 XOR c.$day = 1 AND NOT "
-                                . "( (c.start_time >= Cast('22:00' AS time) AND c.end_time <= Cast('23:50' AS time)) OR"
-                                . "(c.start_time <= Cast('22:00' AS time) AND c.end_time >= Cast('22:00' AS time)) OR"
-                                . "(c.start_time >= Cast('22:00' AS time) AND c.start_time <= Cast('23:50' AS time))"
+                        $sql = "SELECT first, last from employee "
+                                . "WHERE eID NOT IN "
+                                . "("
+                                    . "SELECT e.eID "
+                                    . "FROM employee e "
+                                    . "LEFT JOIN class_schedule c ON e.eID = c.eID "
+                                    . "where c.$day = 1 AND "
+                                .    "("
+                                        . "(c.start_time >= Cast('22:00' AS time) AND c.end_time <= Cast('23:59' AS time)) OR "
+                                        . "(c.start_time <= Cast('22:00' AS time) AND c.end_time >= Cast('22:00' AS time)) OR "
+                                        . "(c.start_time >= Cast('22:00' AS time) AND c.start_time <= Cast('23:59' AS time))"
+                                    . ")"
                                 . ")";
                             printNames($sql);
                     }
