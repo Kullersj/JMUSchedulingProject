@@ -43,8 +43,10 @@
                 $num = test_input($result['num']);
                 $prof = test_input($result['prof']);
                 $loc = test_input($result['loc']);
-                $start = test_input($result['start']);
-                $end = test_input($result['end']);
+                $start12 = test_input($result['start']);
+                $end12 = test_input($result['end']);
+                $start = date("H:i", strtotime($start12));
+                $end = date("H:i", strtotime($end12));
                 if (!($subject === "" || $number === "")){
                     if (!ISSET($class['m'])){
                         $mon = 0;
@@ -81,7 +83,7 @@
                     
                     $sql = "INSERT INTO class_schedule (eID, subject, number, professor,
                                 location, start_time, end_time, mon, tue, wed, thu, fri)
-                                VALUES ($jac, '$subject', $num, '$prof', 
+                                VALUES ($jac, '$subject', '$num', '$prof', 
                                 '$loc', '$start', '$end', $mon, $tue, $wed, $thu, $fri)";
                     if ($conn->query($sql) === TRUE) {
                         $_SESSION["jac"] = $jac;
@@ -93,7 +95,6 @@
                 }
             }
             $conn->close();
-            header("Location: workTimes.php");
         }
     }
 
