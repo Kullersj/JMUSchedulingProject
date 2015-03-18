@@ -44,9 +44,12 @@
                         <table id="employeeTable">
                             <tbody id="tbody">
                             <tr>
-                                Everyone <input type="checkbox" name="everyone" value="everyone" id="everyone"/>
+                                <input type="radio" name="people" style="margin-left: 34px" value="hillside" checked="checked"onclick="disablePeople()"/>Hillside
+                                <input type="radio" name="people" style="margin-left: 34px" value="showker" onclick="disablePeople()"/>Showker
+                                <input type="radio" name="people" style="margin-left: 34px" value="everyone"onclick="disablePeople()"/>Everyone
+                                <input type="radio" name="people" style="margin-left: 34px" value="custom" onclick="enablePeople()"/>Custom
                                 <td>
-                                    <select name="person">
+                                    <select name="person[0]" id="person" disabled>
                                         <?php
                                             $sql = "SELECT eID, first, last FROM employee";
                                             $result = $conn->query($sql);
@@ -61,7 +64,7 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="button" id="addPerson" value="Add Person" onclick="insPerson()" size=10 />
+                                    <input type="button" id="addPerson" value="Add Person" onclick="insPerson()" size=10 disabled/>
                                 </td>
                                 <td>
                                 </td>

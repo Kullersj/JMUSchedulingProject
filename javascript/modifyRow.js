@@ -5,6 +5,7 @@
  */
 
 
+
 function deleteRow(row) {
     var i = row.parentNode.parentNode.rowIndex;
     var x = document.getElementById('ClassTable');
