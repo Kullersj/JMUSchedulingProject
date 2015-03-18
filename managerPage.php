@@ -44,7 +44,7 @@
                         <table id="employeeTable">
                             <tbody id="tbody">
                             <tr>
-                                <input type="radio" name="people" style="margin-left: 34px" value="Hillside" checked="checked"onclick="disablePeople()"/>Hillside
+                                <input type="radio" name="people" style="margin-left: 34px" value="Hillside" checked="checked" onclick="disablePeople()"/>Hillside
                                 <input type="radio" name="people" style="margin-left: 34px" value="Showker" onclick="disablePeople()"/>Showker
                                 <input type="radio" name="people" style="margin-left: 34px" value="everyone"onclick="disablePeople()"/>Everyone
                                 <input type="radio" name="people" style="margin-left: 34px" value="custom" onclick="enablePeople()"/>Custom

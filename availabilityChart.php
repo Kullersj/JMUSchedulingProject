@@ -23,20 +23,22 @@ and open the template in the editor.
         $days = $_POST['day'];
 
         $people = $_POST['people'];
+
         
         $addSQL = "";
         
-        if ($people === "Custom") {
+        if ($people === "custom") {
+            $person = $_POST['person'];
             $eIDList = "(";
-            foreach ($people as $person) {
-                $eIDList .= "$person";
-                if(!($person === end($people))){
-                    $eIDList .= ",";
+            foreach ($person as $assist) {
+                $eIDList .= "$assist";
+                if(!($assist === end($person))){
+                    $eIDList .= ", ";
                 }
             }
             $eIDList .= ")";
             $eIDSQL = " AND eID IN $eIDList";
-            $addSQL .= $eIDList;
+            $addSQL .= $eIDSQL;
         }
         
         if($people === "Hillside" || $people === "Showker"){
@@ -44,7 +46,7 @@ and open the template in the editor.
             $addSQL .= $locSQL;
         }
         
-        
+        $_SESSION['addSQL'] = $addSQL;
 
         function printNames($sql) {
             $servername = $_SESSION['servername'];
@@ -55,7 +57,7 @@ and open the template in the editor.
             $conn = new mysqli($servername, $username, $password, $dbname);
             echo '<td>';
             echo '<ul>';
-            $sql .= $addSQL;
+            $sql .= $_SESSION['addSQL'];
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
