@@ -23,13 +23,28 @@ and open the template in the editor.
         $days = $_POST['day'];
 
         $people = $_POST['people'];
-
+        
+        $addSQL = "";
+        
         if ($people === "Custom") {
             $eIDList = "(";
             foreach ($people as $person) {
-                
+                $eIDList .= "$person";
+                if(!($person === end($people))){
+                    $eIDList .= ",";
+                }
             }
+            $eIDList .= ")";
+            $eIDSQL = " AND eID IN $eIDList";
+            $addSQL .= $eIDList;
         }
+        
+        if($people === "Hillside" || $people === "Showker"){
+            $locSQL = " AND location = '$people'";
+            $addSQL .= $locSQL;
+        }
+        
+        
 
         function printNames($sql) {
             $servername = $_SESSION['servername'];
@@ -40,6 +55,7 @@ and open the template in the editor.
             $conn = new mysqli($servername, $username, $password, $dbname);
             echo '<td>';
             echo '<ul>';
+            $sql .= $addSQL;
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
@@ -84,15 +100,15 @@ and open the template in the editor.
                     $sql = "SELECT first, last from employee "
                             . "WHERE eID NOT IN "
                             . "("
-                            . "SELECT e.eID "
-                            . "FROM employee e "
-                            . "LEFT JOIN class_schedule c ON e.eID = c.eID "
-                            . "where c.$day = 1 AND "
-                            . "("
-                            . "(c.start_time >= Cast('7:45' AS time) AND c.end_time <= Cast('10:00' AS time)) OR "
-                            . "(c.start_time <= Cast('7:45' AS time) AND c.end_time >= Cast('7:45' AS time)) OR "
-                            . "(c.start_time >= Cast('7:45' AS time) AND c.start_time <= Cast('10:00' AS time))"
-                            . ")"
+                                . "SELECT e.eID "
+                                . "FROM employee e "
+                                . "LEFT JOIN class_schedule c ON e.eID = c.eID "
+                                . "where c.$day = 1 AND "
+                                . "("
+                                    . "(c.start_time >= Cast('7:45' AS time) AND c.end_time <= Cast('10:00' AS time)) OR "
+                                    . "(c.start_time <= Cast('7:45' AS time) AND c.end_time >= Cast('7:45' AS time)) OR "
+                                    . "(c.start_time >= Cast('7:45' AS time) AND c.start_time <= Cast('10:00' AS time))"
+                                . ")"
                             . ")";
                     printNames($sql);
                 }
@@ -105,15 +121,15 @@ and open the template in the editor.
                     $sql = "SELECT first, last from employee "
                             . "WHERE eID NOT IN "
                             . "("
-                            . "SELECT e.eID "
-                            . "FROM employee e "
-                            . "LEFT JOIN class_schedule c ON e.eID = c.eID "
-                            . "where c.$day = 1 AND "
-                            . "("
-                            . "(c.start_time >= Cast('10:00' AS time) AND c.end_time <= Cast('12:00' AS time)) OR "
-                            . "(c.start_time <= Cast('10:00' AS time) AND c.end_time >= Cast('10:00' AS time)) OR "
-                            . "(c.start_time >= Cast('10:00' AS time) AND c.start_time <= Cast('12:00' AS time))"
-                            . ")"
+                                . "SELECT e.eID "
+                                . "FROM employee e "
+                                . "LEFT JOIN class_schedule c ON e.eID = c.eID "
+                                . "where c.$day = 1 AND "
+                                . "("
+                                    . "(c.start_time >= Cast('10:00' AS time) AND c.end_time <= Cast('12:00' AS time)) OR "
+                                    . "(c.start_time <= Cast('10:00' AS time) AND c.end_time >= Cast('10:00' AS time)) OR "
+                                    . "(c.start_time >= Cast('10:00' AS time) AND c.start_time <= Cast('12:00' AS time))"
+                                . ")"
                             . ")";
                     printNames($sql);
                 }
@@ -126,15 +142,15 @@ and open the template in the editor.
                     $sql = "SELECT first, last from employee "
                             . "WHERE eID NOT IN "
                             . "("
-                            . "SELECT e.eID "
-                            . "FROM employee e "
-                            . "LEFT JOIN class_schedule c ON e.eID = c.eID "
-                            . "where c.$day = 1 AND "
-                            . "("
-                            . "(c.start_time >= Cast('12:00' AS time) AND c.end_time <= Cast('14:00' AS time)) OR "
-                            . "(c.start_time <= Cast('12:00' AS time) AND c.end_time >= Cast('12:00' AS time)) OR "
-                            . "(c.start_time >= Cast('12:00' AS time) AND c.start_time <= Cast('14:00' AS time))"
-                            . ")"
+                                . "SELECT e.eID "
+                                . "FROM employee e "
+                                . "LEFT JOIN class_schedule c ON e.eID = c.eID "
+                                . "where c.$day = 1 AND "
+                                . "("
+                                    . "(c.start_time >= Cast('12:00' AS time) AND c.end_time <= Cast('14:00' AS time)) OR "
+                                    . "(c.start_time <= Cast('12:00' AS time) AND c.end_time >= Cast('12:00' AS time)) OR "
+                                    . "(c.start_time >= Cast('12:00' AS time) AND c.start_time <= Cast('14:00' AS time))"
+                                . ")"
                             . ")";
                     printNames($sql);
                 }
@@ -147,15 +163,15 @@ and open the template in the editor.
                     $sql = "SELECT first, last from employee "
                             . "WHERE eID NOT IN "
                             . "("
-                            . "SELECT e.eID "
-                            . "FROM employee e "
-                            . "LEFT JOIN class_schedule c ON e.eID = c.eID "
-                            . "where c.$day = 1 AND "
-                            . "("
-                            . "(c.start_time >= Cast('14:00' AS time) AND c.end_time <= Cast('16:00' AS time)) OR "
-                            . "(c.start_time <= Cast('14:00' AS time) AND c.end_time >= Cast('14:00' AS time)) OR "
-                            . "(c.start_time >= Cast('14:00' AS time) AND c.start_time <= Cast('16:00' AS time))"
-                            . ")"
+                                . "SELECT e.eID "
+                                . "FROM employee e "
+                                . "LEFT JOIN class_schedule c ON e.eID = c.eID "
+                                . "where c.$day = 1 AND "
+                                . "("
+                                    . "(c.start_time >= Cast('14:00' AS time) AND c.end_time <= Cast('16:00' AS time)) OR "
+                                    . "(c.start_time <= Cast('14:00' AS time) AND c.end_time >= Cast('14:00' AS time)) OR "
+                                    . "(c.start_time >= Cast('14:00' AS time) AND c.start_time <= Cast('16:00' AS time))"
+                                . ")"
                             . ")";
                     printNames($sql);
                 }
@@ -168,15 +184,15 @@ and open the template in the editor.
                     $sql = "SELECT first, last from employee "
                             . "WHERE eID NOT IN "
                             . "("
-                            . "SELECT e.eID "
-                            . "FROM employee e "
-                            . "LEFT JOIN class_schedule c ON e.eID = c.eID "
-                            . "where c.$day = 1 AND "
-                            . "("
-                            . "(c.start_time >= Cast('16:00' AS time) AND c.end_time <= Cast('18:00' AS time)) OR "
-                            . "(c.start_time <= Cast('16:00' AS time) AND c.end_time >= Cast('16:00' AS time)) OR "
-                            . "(c.start_time >= Cast('16:00' AS time) AND c.start_time <= Cast('18:00' AS time))"
-                            . ")"
+                                . "SELECT e.eID "
+                                . "FROM employee e "
+                                . "LEFT JOIN class_schedule c ON e.eID = c.eID "
+                                . "where c.$day = 1 AND "
+                                . "("
+                                    . "(c.start_time >= Cast('16:00' AS time) AND c.end_time <= Cast('18:00' AS time)) OR "
+                                    . "(c.start_time <= Cast('16:00' AS time) AND c.end_time >= Cast('16:00' AS time)) OR "
+                                    . "(c.start_time >= Cast('16:00' AS time) AND c.start_time <= Cast('18:00' AS time))"
+                                . ")"
                             . ")";
                     printNames($sql);
                 }
@@ -189,15 +205,15 @@ and open the template in the editor.
                     $sql = "SELECT first, last from employee "
                             . "WHERE eID NOT IN "
                             . "("
-                            . "SELECT e.eID "
-                            . "FROM employee e "
-                            . "LEFT JOIN class_schedule c ON e.eID = c.eID "
-                            . "where c.$day = 1 AND "
-                            . "("
-                            . "(c.start_time >= Cast('18:00' AS time) AND c.end_time <= Cast('20:00' AS time)) OR "
-                            . "(c.start_time <= Cast('18:00' AS time) AND c.end_time >= Cast('18:00' AS time)) OR "
-                            . "(c.start_time >= Cast('18:00' AS time) AND c.start_time <= Cast('20:00' AS time))"
-                            . ")"
+                                . "SELECT e.eID "
+                                . "FROM employee e "
+                                . "LEFT JOIN class_schedule c ON e.eID = c.eID "
+                                . "where c.$day = 1 AND "
+                                . "("
+                                    . "(c.start_time >= Cast('18:00' AS time) AND c.end_time <= Cast('20:00' AS time)) OR "
+                                    . "(c.start_time <= Cast('18:00' AS time) AND c.end_time >= Cast('18:00' AS time)) OR "
+                                    . "(c.start_time >= Cast('18:00' AS time) AND c.start_time <= Cast('20:00' AS time))"
+                                . ")"
                             . ")";
                     printNames($sql);
                 }
@@ -210,15 +226,15 @@ and open the template in the editor.
                     $sql = "SELECT first, last from employee "
                             . "WHERE eID NOT IN "
                             . "("
-                            . "SELECT e.eID "
-                            . "FROM employee e "
-                            . "LEFT JOIN class_schedule c ON e.eID = c.eID "
-                            . "where c.$day = 1 AND "
-                            . "("
-                            . "(c.start_time >= Cast('20:00' AS time) AND c.end_time <= Cast('22:00' AS time)) OR "
-                            . "(c.start_time <= Cast('20:00' AS time) AND c.end_time >= Cast('20:00' AS time)) OR "
-                            . "(c.start_time >= Cast('20:00' AS time) AND c.start_time <= Cast('22:00' AS time))"
-                            . ")"
+                                . "SELECT e.eID "
+                                . "FROM employee e "
+                                . "LEFT JOIN class_schedule c ON e.eID = c.eID "
+                                . "where c.$day = 1 AND "
+                                . "("
+                                    . "(c.start_time >= Cast('20:00' AS time) AND c.end_time <= Cast('22:00' AS time)) OR "
+                                    . "(c.start_time <= Cast('20:00' AS time) AND c.end_time >= Cast('20:00' AS time)) OR "
+                                    . "(c.start_time >= Cast('20:00' AS time) AND c.start_time <= Cast('22:00' AS time))"
+                                . ")"
                             . ")";
                     printNames($sql);
                 }
@@ -231,15 +247,15 @@ and open the template in the editor.
                     $sql = "SELECT first, last from employee "
                             . "WHERE eID NOT IN "
                             . "("
-                            . "SELECT e.eID "
-                            . "FROM employee e "
-                            . "LEFT JOIN class_schedule c ON e.eID = c.eID "
-                            . "where c.$day = 1 AND "
-                            . "("
-                            . "(c.start_time >= Cast('22:00' AS time) AND c.end_time <= Cast('23:59' AS time)) OR "
-                            . "(c.start_time <= Cast('22:00' AS time) AND c.end_time >= Cast('22:00' AS time)) OR "
-                            . "(c.start_time >= Cast('22:00' AS time) AND c.start_time <= Cast('23:59' AS time))"
-                            . ")"
+                                . "SELECT e.eID "
+                                . "FROM employee e "
+                                . "LEFT JOIN class_schedule c ON e.eID = c.eID "
+                                . "where c.$day = 1 AND "
+                                . "("
+                                    . "(c.start_time >= Cast('22:00' AS time) AND c.end_time <= Cast('23:59' AS time)) OR "
+                                    . "(c.start_time <= Cast('22:00' AS time) AND c.end_time >= Cast('22:00' AS time)) OR "
+                                    . "(c.start_time >= Cast('22:00' AS time) AND c.start_time <= Cast('23:59' AS time))"
+                                . ")"
                             . ")";
                     printNames($sql);
                 }
