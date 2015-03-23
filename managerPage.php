@@ -78,11 +78,11 @@
                                 <td>
                                     <p class="days">M T W Th F</p>
                                     <p class="boxes">
-                                    <input type="checkbox" name="day[Monday]" value="mon" id="mon"/>
-                                    <input type="checkbox" name="day[Tuesday]" value="tue" id="tue"/>
-                                    <input type="checkbox" name="day[Wednesday]" value="wed" id="wed"/>
-                                    <input type="checkbox" name="day[Thursday]" value="thu" id="thr"/>
-                                    <input type="checkbox" name="day[Friday]" value="fri" id="fri"/>
+                                    <input type="checkbox" name="day[Monday]" value="mon" id="mon" checked/>
+                                    <input type="checkbox" name="day[Tuesday]" value="tue" id="tue" checked/>
+                                    <input type="checkbox" name="day[Wednesday]" value="wed" id="wed" checked/>
+                                    <input type="checkbox" name="day[Thursday]" value="thu" id="thr" checked/>
+                                    <input type="checkbox" name="day[Friday]" value="fri" id="fri" checked/>
                                     </p>
                                 </td>
                             </tr>

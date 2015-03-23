@@ -4,7 +4,11 @@
  * and open the template in the editor.
  */
 
-
+function changeEID(){
+    var jac = document.getElementById('jac');
+    
+    jac.disabled = false;   
+}
 
 function deleteRow(row) {
     var i = row.parentNode.parentNode.rowIndex;

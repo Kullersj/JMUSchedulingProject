@@ -13,10 +13,13 @@
     <?php
     session_start();
     if (isset($_POST['jac'])){
-        $jac = $_POST['jac'];
+        $jac = $jac = test_input($_POST['jac']);
     }
     else if (isset($_SESSION['jac'])){
         $jac = $_SESSION['jac'];
+    }
+    else{
+        $jac = 123456789;
     }
     $servername = $_SESSION['servername'];
     $username = $_SESSION['username'];
@@ -112,8 +115,18 @@
         <h1><center>JMU Scheduling Form</center></h1>
         If a class meets at multiple times during the week please add each time as a separate class.<br>
         If the Subject or Class Number is left empty then the class will not be counted.<br>
-        Your eID is: <b><?php echo $jac?></b>
         <form id='classSchedule' method='post' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" >
+            <div class="ChangeEID">
+                <table id='ChangeEID'>
+                    <tr>
+                        <td>Your eID is:</td>
+                        <td><input type="text" name="jac" id="jac" placeholder="<?php echo $jac?>" disabled/></td>
+                        <td><input type="button" id="enableEID" value="Change eID" onclick="changeEID()"/></td>
+                    </tr>
+                </table>
+            </div>
+            
+            
             <table id="ClassTable">
                 <thead>
                     <tr>
