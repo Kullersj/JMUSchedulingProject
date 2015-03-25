@@ -73,13 +73,12 @@ and open the template in the editor.
                     $endTime = $value;
                     echo '<tr>';
                     echo "<th>$milToStandTime[$startTime] - $milToStandTime[$endTime]</th>";
-                    $i = 0;
                     foreach($days as $day){
                         echo "<td>";
                             echo "<center>";
                                 echo "Available?";
                                 echo "<br>";
-                                echo "<input type=\"radio\" name=\"day[$day][$startTime][available]\" value=\"yes\" checked onClick=\"removeReason()\">Yes";
+                                echo "<input type=\"radio\" name=\"day[$day][$startTime][available]\" value=\"yes\" checked onClick=\"removeReason(this)\">Yes";
                                 echo "<input type=\"radio\" name=\"day[$day][$startTime][available]\" value=\"No\" onClick=\"addReason(this)\">No ";
                                 echo "Preferred?";
                                 echo "<br>";
@@ -90,7 +89,6 @@ and open the template in the editor.
                                 echo "</select>";
                             echo "</center>";
                         echo "</td>";
-                        $i++;
                     }
                     echo '</tr>';
                 }

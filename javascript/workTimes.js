@@ -9,14 +9,18 @@ function addReason(section) {
     var box = section.parentNode;
     
     var input = document.createElement("input");
-    var day = "";
-    var shift = "";
     var name = section.attributes[1].nodeValue;
-    input.type = text;
-    input.name = "day[" + day + "][" + shift + "][reason]"
+    input.type = "text";
+    var newName = name.replace("available", "reason");
+    input.name = newName;
+    input.placeholder = "Why not?"
+    box.appendChild(input);
 
 }
 
-function removeReason() {
+function removeReason(section) {
+    var x = document.getElementById('schedTable');
+    var box = section.parentNode;
     
+    box.removeChild(box.childNodes[box.childNodes.length - 1]);
 }
