@@ -119,7 +119,7 @@
             <div class="ChangeEID">
                 <table id='ChangeEID'>
                     <tr>
-                        <td>Your eID is:</td>
+                        <td>Your JAC number is:</td>
                         <td><input type="text" name="jac" id="jac" placeholder="<?php echo $jac?>" disabled/></td>
                         <td><input type="button" id="enableEID" value="Change eID" onclick="changeEID()"/></td>
                     </tr>
