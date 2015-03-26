@@ -8,19 +8,23 @@ function addReason(section) {
     var x = document.getElementById('schedTable');
     var box = section.parentNode;
     
-    var input = document.createElement("input");
-    var name = section.attributes[1].nodeValue;
-    input.type = "text";
-    var newName = name.replace("available", "reason");
-    input.name = newName;
-    input.placeholder = "Why not?"
-    box.appendChild(input);
+    if (box.children.length === 6){
+        var input = document.createElement("input");
+        var name = section.attributes[1].nodeValue;
+        input.type = "text";
+        var newName = name.replace("available", "reason");
+        input.name = newName;
+        input.placeholder = "Why not?";
+        input.required = true;
+        box.appendChild(input);
+    }
 
 }
 
 function removeReason(section) {
     var x = document.getElementById('schedTable');
     var box = section.parentNode;
-    
-    box.removeChild(box.childNodes[box.childNodes.length - 1]);
+    if(box.children.length === 7){
+        box.removeChild(box.childNodes[box.childNodes.length - 1]);
+    }
 }

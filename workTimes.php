@@ -27,6 +27,21 @@ and open the template in the editor.
         $dbname = $_SESSION['dbname'];
 
         $conn = new mysqli($servername, $username, $password, $dbname);
+        
+        if ($_SERVER["REQUEST_METHOD"] == "POST"){
+            $filters = array (
+              "reason" => FILTER_SANITIZE_STRING  
+            );
+        }
+        
+        if(is_array($_POST['day'])){
+            $days = $_POST['day'];
+            foreach($days as $day){
+                foreach ($day as $shift){
+                    $time = $shift;
+                }
+            }
+        }
         ?>
         <form id='classSchedule' method='post' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" >
         <table id="schedTable">
@@ -74,21 +89,25 @@ and open the template in the editor.
                     echo '<tr>';
                     echo "<th>$milToStandTime[$startTime] - $milToStandTime[$endTime]</th>";
                     foreach($days as $day){
-                        echo "<td>";
-                            echo "<center>";
-                                echo "Available?";
-                                echo "<br>";
-                                echo "<input type=\"radio\" name=\"day[$day][$startTime][available]\" value=\"yes\" checked onClick=\"removeReason(this)\">Yes";
-                                echo "<input type=\"radio\" name=\"day[$day][$startTime][available]\" value=\"No\" onClick=\"addReason(this)\">No ";
-                                echo "Preferred?";
-                                echo "<br>";
-                                echo "<select name=\"day[$day][$startTime][preferred]\">";
-                                    echo "<option value=\"neither\">No Preference</option>";
-                                    echo "<option value=\"yes\">Yes</option>";
-                                    echo "<option value=\"no\">No</option>";
-                                echo "</select>";
-                            echo "</center>";
-                        echo "</td>";
+                        if (!($day === "fri" && ($startTime === '16:00' || $startTime === '18:00' ||
+                                $startTime === '20:00' || $startTime === '22:00'))){
+                            echo "<td>";
+                                echo "<center>";
+                                    echo "Available?";
+                                    echo "<br>";
+                                    echo "<input type=\"radio\" name=\"day[$day][$startTime][available]\" value=\"yes\" checked onClick=\"removeReason(this)\">Yes";
+                                    echo "<input type=\"radio\" name=\"day[$day][$startTime][available]\" value=\"No\" onClick=\"addReason(this)\">No ";
+                                    echo "<br>";
+                                    echo "Preferred?";
+                                    echo "<br>";
+                                    echo "<select name=\"day[$day][$startTime][preferred]\">";
+                                        echo "<option value=\"neither\">No Preference</option>";
+                                        echo "<option value=\"yes\">Yes</option>";
+                                        echo "<option value=\"no\">No</option>";
+                                    echo "</select>";
+                                echo "</center>";
+                            echo "</td>";
+                        }
                     }
                     echo '</tr>';
                 }
