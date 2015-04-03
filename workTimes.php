@@ -20,7 +20,7 @@ and open the template in the editor.
         <?php
         session_start();
         //$jac = $_SESSION['jac'];
-        $jac = 1234;
+        $jac = 108223437;
         $servername = $_SESSION['servername'];
         $username = $_SESSION['username'];
         $password = $_SESSION['password'];
@@ -34,11 +34,53 @@ and open the template in the editor.
             );
         }
         
+        $shiftTimes = [
+            '7:45' => '10:00',
+            '10:00' => '12:00',
+            '12:00' => '14:00',
+            '14:00' => '16:00',
+            '16:00' => '18:00',
+            '18:00' => '20:00',
+            '20:00' => '22:00',
+            '22:00' => '00:15'
+        ];
+        
         if(is_array($_POST['day'])){
             $days = $_POST['day'];
             foreach($days as $day){
                 foreach ($day as $shift){
-                    $time = $shift;
+                    $time = $shift['time'];
+                    $available = $shift['available'];
+                    if ($available === "No"){
+                        $reason = $shift['reason'];
+                        $availableBool = 0;
+                    }
+                    else {
+                        $availableBool = 1;
+                    }
+                    
+                    $preferred = $shift['preferred'];
+                    $shiftDay = $shift['day'];
+                    if ($availableBool === 1) {
+                        $sql = "INSERT INTO availability (eID, day, start_time, end_time, "
+                                . "preferred, available) "
+                                . "VALUES ($jac, '$shiftDay', '$time', '$shiftTimes[$time]', "
+                                . "'$preferred', $availableBool)";
+                    }
+                    else {
+                        $sql = "INSERT INTO availability (eID, day, start_time, end_time, "
+                                . "preferred, available, reason) "
+                                . "VALUES ($jac, '$shiftDay', '$time', '$shiftTimes[$time]', "
+                                . "'$preferred', $availableBool, '$reason')";
+                    }
+                    
+                    if ($conn->query($sql) === TRUE) {
+                        $_SESSION["jac"] = $jac;
+                        //header("Location: classSchedule.php");
+                        echo "Record created successfully";
+                    } else {
+                        echo "Error: " . $sql . "<br>" . $conn->error;
+                    }
                 }
             }
         }
@@ -81,6 +123,7 @@ and open the template in the editor.
                     '22:00' => '10:00',
                     '00:15' => '12:15'
                 ];
+        
                 $days = ['mon', 'tue', 'wed', 'thu', 'fri'];
                 
                 foreach($shiftTimes as $key => $value) {
@@ -95,8 +138,10 @@ and open the template in the editor.
                                 echo "<center>";
                                     echo "Available?";
                                     echo "<br>";
-                                    echo "<input type=\"radio\" name=\"day[$day][$startTime][available]\" value=\"yes\" checked onClick=\"removeReason(this)\">Yes";
-                                    echo "<input type=\"radio\" name=\"day[$day][$startTime][available]\" value=\"No\" onClick=\"addReason(this)\">No ";
+                                    echo "<input type=\"radio\" name=\"day[$day][$startTime][available]\" value=\"yes\" checked onClick=\"removeReason(this)\" >Yes";
+                                    echo "<input type=\"radio\" name=\"day[$day][$startTime][available]\" value=\"No\" onClick=\"addReason(this)\" >No";
+                                    echo "<input type=\"hidden\" name=\"day[$day][$startTime][time]\" value=\"$startTime\" >";
+                                    echo "<input type=\"hidden\" name=\"day[$day][$startTime][day]\" value=\"$day\" >";
                                     echo "<br>";
                                     echo "Preferred?";
                                     echo "<br>";

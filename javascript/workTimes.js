@@ -8,7 +8,7 @@ function addReason(section) {
     var x = document.getElementById('schedTable');
     var box = section.parentNode;
     
-    if (box.children.length === 6){
+    if (box.children.length === 8){
         var input = document.createElement("input");
         var name = section.attributes[1].nodeValue;
         input.type = "text";
@@ -24,7 +24,7 @@ function addReason(section) {
 function removeReason(section) {
     var x = document.getElementById('schedTable');
     var box = section.parentNode;
-    if(box.children.length === 7){
+    if(box.children.length === 9){
         box.removeChild(box.childNodes[box.childNodes.length - 1]);
     }
 }
