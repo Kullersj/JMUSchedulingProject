@@ -7,7 +7,7 @@
         <title>
             managerPage
         </title>
-        <link rel="stylesheet" href="css/classSchedule.css">
+        <link rel="stylesheet" type="text/css" href="css/classSchedule.css">
         <style type="text/css">
             #Text1
             {

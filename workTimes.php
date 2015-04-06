@@ -8,7 +8,7 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <title>Work Schedule form</title>
-        <link rel="stylesheet" href="css\main.css">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
         <style type="text/css">
             #Text1
             {
