@@ -119,7 +119,7 @@ and open the template in the editor.
                             $car = 0;
                         }
                         
-                        $jacsql = "SELECT eID FROM employee WHERE eID = '$jac'";
+                        $jacsql = "SELECT jac FROM employee WHERE jac = '$jac'";
                         $result = ($conn->query($jacsql));
                         if($result->num_rows > 0) {
                             $sql = "UPDATE employee
@@ -138,7 +138,7 @@ and open the template in the editor.
                             }
                         }
                         else {
-                            $sql = "INSERT INTO employee (eID, first, last, phone, email,
+                            $sql = "INSERT INTO employee (jac, first, last, phone, email,
                                     local_address, location, car, onCampus, back_to_back, both_labs)
                                     VALUES ($jac, '$fname', '$lname', $phone, '$email', '$address',
                                     '$location', $car, $onCampus, $back2back, $bothlocation)";

@@ -51,11 +51,11 @@
                                 <td>
                                     <select name="person[0]" id="person" disabled>
                                         <?php
-                                            $sql = "SELECT eID, first, last FROM employee";
+                                            $sql = "SELECT jac, first, last FROM employee";
                                             $result = $conn->query($sql);
                                             if ($result->num_rows > 0){
                                                 while($row = $result->fetch_assoc()) {
-                                                    $id = $row['eID'];
+                                                    $id = $row['jac'];
                                                     $name = "{$row['first']} {$row['last']}";
                                                     echo '<option value="' .$id. '">' .$name.'</option>';
                                                 }

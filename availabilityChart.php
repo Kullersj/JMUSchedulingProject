@@ -29,16 +29,16 @@ and open the template in the editor.
         
         if ($people === "custom") {
             $person = $_POST['person'];
-            $eIDList = "(";
+            $jacList = "(";
             foreach ($person as $assist) {
-                $eIDList .= "$assist";
+                $jacList .= "$assist";
                 if(!($assist === end($person))){
-                    $eIDList .= ", ";
+                    $jacList .= ", ";
                 }
             }
-            $eIDList .= ")";
-            $eIDSQL = " AND eID IN $eIDList";
-            $addSQL .= $eIDSQL;
+            $jacList .= ")";
+            $jacList = " AND jac IN $jacList";
+            $addSQL .= $jacSQL;
         }
         
         if($people === "Hillside" || $people === "Showker"){
@@ -71,11 +71,11 @@ and open the template in the editor.
         
         function createSQL($start, $end, $day){
             $sql = "SELECT first, last from employee "
-                . "WHERE eID NOT IN "
+                . "WHERE jac NOT IN "
                 . "("
-                    . "SELECT e.eID "
+                    . "SELECT e.jac "
                     . "FROM employee e "
-                    . "LEFT JOIN class_schedule c ON e.eID = c.eID "
+                    . "LEFT JOIN class_schedule c ON e.jac = c.jac "
                     . "where c.$day = 1 AND "
                     . "("
                         . "(c.start_time >= Cast('$start' AS time) AND c.end_time <= Cast('$end' AS time)) OR "

@@ -45,13 +45,13 @@ and open the template in the editor.
                $semester = test_input($result['semester']);
                $year = test_input($result['year']);
                
-               $tables = ['availability'];
+               $tables = ['employee', 'availability', 'class_schedule'];
                foreach($tables as $table){
                    if (moveToArchive($table, $conn)){
-                       $defaultSQL = "ALTER TABLE 'labOps'.$table' "
-                            . "CHANGE COLUMN 'semester' 'semester' VARCHAR(8 )"
+                       $defaultSQL = "ALTER TABLE $table "
+                            . "CHANGE COLUMN `semester` `semester` VARCHAR(8) "
                                 . "NOT NULL DEFAULT '$semester', "
-                            . "CHANGE COLUMN 'year' 'year' TIME "
+                            . "CHANGE COLUMN `year` `year` YEAR "
                                . "NOT NULL DEFAULT $year;";
                        if ($conn->query($defaultSQL) === TRUE) {
                            echo "Next Semester Prep completed";
@@ -73,10 +73,11 @@ and open the template in the editor.
             
             $sql = "INSERT into $archiveTable SELECT * FROM $table;";
             
+            
              if ($conn->query($sql) === TRUE) {
                 //header("Location: classSchedule.php");
                 echo "Records moved Successfully";
-                $deleteSQL = "DELETE FROM 'labOps'.'$table';";
+                $deleteSQL = "DELETE FROM $table;";
                 if ($conn->query($deleteSQL) === TRUE) {
                     return True;
                 } else {

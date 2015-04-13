@@ -86,7 +86,7 @@
                     $year = 2015;
                     $semester = "Spring";
                     
-                    $sql = "INSERT INTO class_schedule (eID, subject, number, professor,
+                    $sql = "INSERT INTO class_schedule (jac, subject, number, professor,
                                 location, start_time, end_time, mon, tue, wed, thu, fri, year, semester)
                                 VALUES ($jac, '$subject', '$num', '$prof', 
                                 '$loc', '$start', '$end', $mon, $tue, $wed, $thu, $fri, $year, '$semester')";
