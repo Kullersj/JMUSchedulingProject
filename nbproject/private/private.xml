@@ -4,12 +4,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/wamp/www/JMUSchedulingProject/workTimes.php</file>
-            <file>file:/D:/wamp/www/JMUSchedulingProject/Form/index.html</file>
-            <file>file:/D:/wamp/www/JMUSchedulingProject/javascript/modifyRow.js</file>
-            <file>file:/D:/wamp/www/JMUSchedulingProject/index.php</file>
-            <file>file:/D:/wamp/www/JMUSchedulingProject/classSchedule.php</file>
-            <file>file:/D:/wamp/www/JMUSchedulingProject/css/main.css</file>
+            <file>file:/var/www/html/availabilityChart.php</file>
+            <file>file:/var/www/html/index.php</file>
+            <file>file:/var/www/html/workTimes.php</file>
+            <file>file:/var/www/html/classSchedule.php</file>
+            <file>file:/var/www/html/javascript/workTimes.js</file>
+            <file>file:/var/www/html/javascript/modifyRow.js</file>
+            <file>file:/var/www/html/managerPage.php</file>
         </group>
     </open-files>
 </project-private>

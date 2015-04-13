@@ -8,7 +8,7 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <title>Next Semester Prep</title>
-        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="css/semesterPrep.css">
         <style type="text/css">
             #Text1
             {
@@ -20,10 +20,10 @@ and open the template in the editor.
     <body>
         <?php
         session_start();
-        $_SESSION["servername"] = $servername;
-        $_SESSION["username"] = $username;
-        $_SESSION["password"] = $password;
-        $_SESSION["dbname"] = $dbname;
+        $servername = "134.126.151.66";
+        $username = "labops";
+        $password = "XmAs24";
+        $dbname = "labOps";
         
         $conn = new mysqli($servername, $username, $password, $dbname);
         
@@ -45,9 +45,19 @@ and open the template in the editor.
                $semester = test_input($result['semester']);
                $year = test_input($result['year']);
                
-               $tables = ['employee', 'availability', 'class_schedule'];
+               $tables = ['availability'];
                foreach($tables as $table){
-                   moveToArchive($table);
+                   if (moveToArchive($table, $conn)){
+                       $defaultSQL = "ALTER TABLE 'labOps'.$table' "
+                            . "CHANGE COLUMN 'semester' 'semester' VARCHAR(8 )"
+                                . "NOT NULL DEFAULT '$semester', "
+                            . "CHANGE COLUMN 'year' 'year' TIME "
+                               . "NOT NULL DEFAULT $year;";
+                       if ($conn->query($defaultSQL) === TRUE) {
+                           echo "Next Semester Prep completed";
+                       }
+                   }
+                   
                }
          }
          
@@ -58,7 +68,7 @@ and open the template in the editor.
                 return $data;
         }
             
-        function moveToArchive($table){
+        function moveToArchive($table, $conn){
             $archiveTable = "$table"."_archive";
             
             $sql = "INSERT into $archiveTable SELECT * FROM $table;";
@@ -66,9 +76,9 @@ and open the template in the editor.
              if ($conn->query($sql) === TRUE) {
                 //header("Location: classSchedule.php");
                 echo "Records moved Successfully";
-                $deleteSQL = "DELETE FROM $table;";
+                $deleteSQL = "DELETE FROM 'labOps'.'$table';";
                 if ($conn->query($deleteSQL) === TRUE) {
-                    //header("Location: classSchedule.php");
+                    return True;
                 } else {
                     echo "Error: " . $sql . "<br>" . $conn->error;
                 }
@@ -84,7 +94,9 @@ and open the template in the editor.
             <input type="text" name="year" placeholder="Year" style="margin-left: 30px;" value="<?php echo $year;?>"/>
             <span class="error">* <?php echo $yearErr;?></span></br>
             
+            <div id="Submit">
             <input type='submit' name='submit' value='Submit'/>
+            </div>
         </form>
     </body>
 </html>
