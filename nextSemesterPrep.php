@@ -89,11 +89,27 @@ and open the template in the editor.
         }
         ?>
         <form id='semesterPrep' method='post' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" >
-            <input type="text" name="semester" placeholder="Semester" style="margin-left: 30px;" value="<?php echo $semester;?>"/>
-            <span class="error">* <?php echo $semesterErr;?></span></br>
+            <div id="semester">
+                <select name="semester" 
+                        style="height: 24px; width: 88px; margin-left: 30px; margin-top: 0px">
+                    <option value="Fall">Fall</option>
+                    <option value="Spring">Spring</option>
+                </select>
+                <span class="error">* <?php echo $semesterErr;?></span></br>
+            </div>
             
-            <input type="text" name="year" placeholder="Year" style="margin-left: 30px;" value="<?php echo $year;?>"/>
-            <span class="error">* <?php echo $yearErr;?></span></br>
+            <div id="year">
+                <select name="year" 
+                        style="height: 24px; width: 88px; margin-left: 30px; margin-top: 0px">
+                    <?php 
+                        $date = date('Y');
+                        for ($year = $date; $year <= $date+1; $year++){
+                            echo "<option value=\"$year\">$year</option>";
+                        }
+                    ?> 
+                </select>
+                <span class="error">* <?php echo $semesterErr;?></span></br>
+            </div>
             
             <div id="Submit">
             <input type='submit' name='submit' value='Submit'/>

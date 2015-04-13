@@ -10,6 +10,9 @@ and open the template in the editor.
 #Submit {
     padding-top: 10px;
 }
+#semester {
+    padding-bottom: 10px;
+}
 html {
 	min-height: 100%;
 	/*Image only BG fallback*/
