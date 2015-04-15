@@ -92,7 +92,7 @@
                                 '$loc', '$start', '$end', $mon, $tue, $wed, $thu, $fri, $year, '$semester')";
                     if ($conn->query($sql) === TRUE) {
                         $_SESSION["jac"] = $jac;
-                        //header("Location: classSchedule.php");
+                        header("Location: workTimes.php");
                         echo "Record created successfully";
                     } else {
                         echo "Error: " . $sql . "<br>" . $conn->error;
@@ -121,7 +121,7 @@
                     <tr>
                         <td>Your JAC number is:</td>
                         <td><input type="text" name="jac" id="jac" placeholder="<?php echo $jac?>" disabled/></td>
-                        <td><input type="button" id="enableEID" value="Change eID" onclick="changeEID()"/></td>
+                        <td><input type="button" id="enableEID" value="Change JAC" onclick="changeEID()"/></td>
                     </tr>
                 </table>
             </div>

@@ -96,10 +96,14 @@ and open the template in the editor.
         <nav>
             <a href="managerPage.php">Availability Form</a><br>
             <a href="nextSemesterPrep.php">Next Semester Prep</a><br>
-            Assistant lookup<br>
+            Assistant Lookup<br>
+            <a href="index.php">Employee Form</a></br>
         </nav>
         <section>
-            <form id='semesterPrep' method='post' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" >
+            Delete Contents of the database and move them all to an archive table. </br></br>
+            What semester is next?
+            <form id='semesterPrep' method='post' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" 
+                  onsubmit="return confirm('Are you sure you want to prepare for next semester?');">
                 <div id="semester">
                     <select name="semester" 
                             style="height: 24px; width: 88px; margin-left: 30px; margin-top: 0px">

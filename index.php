@@ -20,7 +20,7 @@ and open the template in the editor.
     <body>
         <?php
             session_start();
-            $servername = "127.0.0.1";
+            $servername = "134.126.151.66";
             $username = "labops";
             $password = "XmAs24";
             $dbname = "labOps";
@@ -95,8 +95,9 @@ and open the template in the editor.
                         "onCampus" => FILTER_VALIDATE_BOOLEAN,
                         "car" => FILTER_VALIDATE_BOOLEAN,
                         "year" => FILTER_VALIDATE_INT,
-                        "month" => FILTER_VALIDATE_INT,
-                        "day" => FILTER_VALIDATE_INT
+                        "month" => FILTER_SANITIZE_STRING,
+                        "day" => FILTER_SANITIZE_STRING,
+                        "grad" => FILTER_SANITIZE_STRING
                     );
                     $result = filter_input_array(INPUT_POST, $filters);
                     $fname = test_input($result["fname"]);
@@ -111,9 +112,10 @@ and open the template in the editor.
                     $onCampus = test_input($result["onCampus"]);
                     $email = test_input($result["email"]);
                     $car = test_input($result['car']);
-                    $date = test_input($result['date']);
+                    $day = test_input($result['day']);
                     $month = test_input($result['month']);
                     $year = test_input($result['year']);
+                    $grad = test_input($result['grad']);
                     
                     if ($jac !== "" && strlen((string)$jac) === 9){
 
@@ -131,14 +133,15 @@ and open the template in the editor.
                         if($car === ""){
                             $car = 0;
                         }
-                        $birthday = "$day-$month-$year";
+                        $birthday = "$year-$month-$day";
                         $jacsql = "SELECT jac FROM employee WHERE jac = '$jac'";
                         $result = ($conn->query($jacsql));
                         if($result->num_rows > 0) {
                             $sql = "UPDATE employee
                                    SET first='$fname', last='$lname', phone ='$phone',"
                                     . "email='$email', local_address='$address', "
-                                    . "location='$location', car=$car, birthdate = $birthday, "
+                                    . "location='$location', car=$car, birthdate='$birthday', "
+                                    . "expected_graduation='$grad', "
                                     . "onCampus=$onCampus, back_to_back=$back2back, "
                                     . "both_labs=$bothlocation "
                                     . "WHERE eID=$jac;";
@@ -152,9 +155,10 @@ and open the template in the editor.
                         }
                         else {
                             $sql = "INSERT INTO employee (jac, first, last, phone, email,
-                                    local_address, location, birthdate, car, onCampus, back_to_back, both_labs)
+                                    local_address, location, expected_graduation, 
+                                    birthdate, car, onCampus, back_to_back, both_labs)
                                     VALUES ($jac, '$fname', '$lname', $phone, '$email', '$address',
-                                    '$location', $birthday, $car, $onCampus, $back2back, $bothlocation)";
+                                    '$location', '$grad', '$birthday', $car, $onCampus, $back2back, $bothlocation)";
                             if ($conn->query($sql) === TRUE) {
                                 $_SESSION["jac"] = $jac;
                                 echo "Record created successfully";
@@ -212,9 +216,9 @@ and open the template in the editor.
             
             <label for="day"><b>Date of Birth:<b></label>
             <div id="date2" class="datefield">
-                <input name="day" type="tel" maxlength="2" placeholder="DD"/> /
-                <input name="month" type="tel" maxlength="2" placeholder="MM"/> /
-                <input name="year" type="tel" maxlength="4" placeholder="YYYY" />
+                <input name="month" type="tel" maxlength="2" placeholder="MM" value="<?php echo $month;?>" /> /
+                <input name="day" type="tel" maxlength="2" placeholder="DD" value="<?php echo $day;?>" /> /
+                <input name="year" type="tel" maxlength="4" placeholder="YYYY" value="<?php echo $year;?>" />
             </div></br>
             
          

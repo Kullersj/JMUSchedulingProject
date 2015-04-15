@@ -62,13 +62,13 @@ and open the template in the editor.
                     $preferred = $shift['preferred'];
                     $shiftDay = $shift['day'];
                     if ($availableBool === 1) {
-                        $sql = "INSERT INTO availability (eID, day, start_time, end_time, "
+                        $sql = "INSERT INTO availability (jac, day, start_time, end_time, "
                                 . "preferred, available) "
                                 . "VALUES ($jac, '$shiftDay', '$time', '$shiftTimes[$time]', "
                                 . "'$preferred', $availableBool)";
                     }
                     else {
-                        $sql = "INSERT INTO availability (eID, day, start_time, end_time, "
+                        $sql = "INSERT INTO availability (jac, day, start_time, end_time, "
                                 . "preferred, available, reason) "
                                 . "VALUES ($jac, '$shiftDay', '$time', '$shiftTimes[$time]', "
                                 . "'$preferred', $availableBool, '$reason')";

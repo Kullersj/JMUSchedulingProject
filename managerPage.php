@@ -18,7 +18,7 @@
     <body>
         <?php
             session_start();
-            $servername = "127.0.0.1";
+            $servername = "134.126.151.66";
             $username = "labops";
             $password = "XmAs24";
             $dbname = "labOps";
@@ -45,6 +45,7 @@
             <a href="managerPage.php">Availability Form</a><br>
             <a href="nextSemesterPrep.php">Next Semester Prep</a><br>
             Assistant lookup<br>
+            <a href="index.php">Employee Form</a></br>
         </nav>
         <section>
             <form id="chart" method='post' action="availabilityChart.php" >

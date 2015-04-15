@@ -27,7 +27,7 @@ label {
 }
 
 .datefield input { 
-    width: 1.7em; 
+    width: 2.5em; 
     padding: 0 0.4em; 
     border: none; 
     font-size: 100%; 
@@ -35,7 +35,7 @@ label {
     color: #000;            
 }
 
-.datefield input#year { width:2.5em; }
+.datefield input#year { width:2.8em; }
 .datefield input:focus { outline:none; }
 
 
