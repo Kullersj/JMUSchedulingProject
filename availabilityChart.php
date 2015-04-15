@@ -82,6 +82,14 @@ and open the template in the editor.
                         . "(c.start_time <= Cast('$start' AS time) AND c.end_time >= Cast('$start' AS time)) OR "
                         . "(c.start_time >= Cast('$start' AS time) AND c.start_time <= Cast('$end' AS time))"
                     . ")"
+                . ")"
+                . "AND jac IN "
+                . "("
+                    . "SELECT e.jac "
+                    . "FROM employee e "
+                    . "LEFT JOIN availability a ON e.jac = a.jac "
+                    . "where a.$day = '$day' AND"
+                    . "a.available = 1"
                 . ")";
             return $sql;
         }

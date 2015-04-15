@@ -25,7 +25,7 @@ and open the template in the editor.
         $password = "XmAs24";
         $dbname = "labOps";
         
-        $conn = new mysqli($servername, $username, $password, $dbname);
+        //$conn = new mysqli($servername, $username, $password, $dbname);
         
         $year = $semester = "";
         $semesterErr = $yearErr = "";
@@ -88,32 +88,44 @@ and open the template in the editor.
             }
         }
         ?>
-        <form id='semesterPrep' method='post' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" >
-            <div id="semester">
-                <select name="semester" 
-                        style="height: 24px; width: 88px; margin-left: 30px; margin-top: 0px">
-                    <option value="Fall">Fall</option>
-                    <option value="Spring">Spring</option>
-                </select>
-                <span class="error">* <?php echo $semesterErr;?></span></br>
-            </div>
-            
-            <div id="year">
-                <select name="year" 
-                        style="height: 24px; width: 88px; margin-left: 30px; margin-top: 0px">
-                    <?php 
-                        $date = date('Y');
-                        for ($year = $date; $year <= $date+1; $year++){
-                            echo "<option value=\"$year\">$year</option>";
-                        }
-                    ?> 
-                </select>
-                <span class="error">* <?php echo $semesterErr;?></span></br>
-            </div>
-            
-            <div id="Submit">
-            <input type='submit' name='submit' value='Submit'/>
-            </div>
-        </form>
+                <header>
+            <img src="img/dukes.png" style="width:225px;height:200px"> <br>
+            Prepare for next semester!
+        </header>
+        
+        <nav>
+            <a href="managerPage.php">Availability Form</a><br>
+            <a href="nextSemesterPrep.php">Next Semester Prep</a><br>
+            Assistant lookup<br>
+        </nav>
+        <section>
+            <form id='semesterPrep' method='post' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" >
+                <div id="semester">
+                    <select name="semester" 
+                            style="height: 24px; width: 88px; margin-left: 30px; margin-top: 0px">
+                        <option value="Fall">Fall</option>
+                        <option value="Spring">Spring</option>
+                    </select>
+                    <span class="error">* <?php echo $semesterErr;?></span></br>
+                </div>
+
+                <div id="year">
+                    <select name="year" 
+                            style="height: 24px; width: 88px; margin-left: 30px; margin-top: 0px">
+                        <?php 
+                            $date = date('Y');
+                            for ($year = $date; $year <= $date+1; $year++){
+                                echo "<option value=\"$year\">$year</option>";
+                            }
+                        ?> 
+                    </select>
+                    <span class="error">* <?php echo $semesterErr;?></span></br>
+                </div>
+
+                <div id="Submit">
+                <input type='submit' name='submit' value='Submit'/>
+                </div>
+            </form>
+        </section>
     </body>
 </html>

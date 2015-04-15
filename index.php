@@ -32,8 +32,12 @@ and open the template in the editor.
             // Create connection
             $conn = new mysqli($servername, $username, $password, $dbname);
             // define variables and set to empty values
-            $fname = $lname = $phone = $address = $jac = $back2back = $bothlocation = $location = $onCampus = $email = "";
-            $fnameErr = $lnameErr = $phoneErr = $emailErr = $jacErr = $locErr = $bothErr = $back2Err = $campusErr = $addressErr = "";
+            $fname = $lname = $phone = $address = $jac = $back2back = 
+                    $bothlocation = $location = $onCampus = 
+                    $car = $email = $grad = $date = $month = $year = "";
+            $fnameErr = $lnameErr = $phoneErr = $emailErr = $jacErr = 
+                    $locErr = $bothErr = $back2Err = $campusErr = 
+                    $addressErr = $carErr = $gradErr = "";
             
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (empty($_POST["fname"])){
@@ -67,7 +71,10 @@ and open the template in the editor.
                     $jacErr = "JAC number is required";
                 }
                 if (empty($_POST["car"])){
-                    $addressErr = "Please choose an option";
+                    $carErr = "Please choose an option";
+                }
+                if (empty($_POST["grad"])){
+                    $carErr = "When are you supposed to graduate?";
                 }
                 if (!($fnameErr !== "" || $lnameErr !== "" || $jacErr !== "" || 
                         $phoneErr !== "" || $emailErr !== "" || $back2Err !== "" ||
@@ -86,7 +93,10 @@ and open the template in the editor.
                         "bothlocation" => FILTER_VALIDATE_BOOLEAN,
                         "location" => FILTER_SANITIZE_STRING,
                         "onCampus" => FILTER_VALIDATE_BOOLEAN,
-                        "car" => FILTER_VALIDATE_BOOLEAN
+                        "car" => FILTER_VALIDATE_BOOLEAN,
+                        "year" => FILTER_VALIDATE_INT,
+                        "month" => FILTER_VALIDATE_INT,
+                        "day" => FILTER_VALIDATE_INT
                     );
                     $result = filter_input_array(INPUT_POST, $filters);
                     $fname = test_input($result["fname"]);
@@ -101,6 +111,9 @@ and open the template in the editor.
                     $onCampus = test_input($result["onCampus"]);
                     $email = test_input($result["email"]);
                     $car = test_input($result['car']);
+                    $date = test_input($result['date']);
+                    $month = test_input($result['month']);
+                    $year = test_input($result['year']);
                     
                     if ($jac !== "" && strlen((string)$jac) === 9){
 
@@ -118,14 +131,14 @@ and open the template in the editor.
                         if($car === ""){
                             $car = 0;
                         }
-                        
+                        $birthday = "$day-$month-$year";
                         $jacsql = "SELECT jac FROM employee WHERE jac = '$jac'";
                         $result = ($conn->query($jacsql));
                         if($result->num_rows > 0) {
                             $sql = "UPDATE employee
                                    SET first='$fname', last='$lname', phone ='$phone',"
                                     . "email='$email', local_address='$address', "
-                                    . "location='$location', car=$car, "
+                                    . "location='$location', car=$car, birthdate = $birthday, "
                                     . "onCampus=$onCampus, back_to_back=$back2back, "
                                     . "both_labs=$bothlocation "
                                     . "WHERE eID=$jac;";
@@ -139,9 +152,9 @@ and open the template in the editor.
                         }
                         else {
                             $sql = "INSERT INTO employee (jac, first, last, phone, email,
-                                    local_address, location, car, onCampus, back_to_back, both_labs)
+                                    local_address, location, birthdate, car, onCampus, back_to_back, both_labs)
                                     VALUES ($jac, '$fname', '$lname', $phone, '$email', '$address',
-                                    '$location', $car, $onCampus, $back2back, $bothlocation)";
+                                    '$location', $birthday, $car, $onCampus, $back2back, $bothlocation)";
                             if ($conn->query($sql) === TRUE) {
                                 $_SESSION["jac"] = $jac;
                                 echo "Record created successfully";
@@ -193,6 +206,17 @@ and open the template in the editor.
             
 	    <input type="text" name="email" placeholder="Email" style="margin-left: 30px;" value="<?php echo $email;?>" />
             <span class="error">* <?php echo $emailErr;?></span></br>
+	    
+            <input type="text" name="grad" placeholder="Expected Graduation" style="margin-left: 30px;" value="<?php echo $grad;?>" />
+            <span class="error">* <?php echo $gradErr;?></span></br></br>
+            
+            <label for="day"><b>Date of Birth:<b></label>
+            <div id="date2" class="datefield">
+                <input name="day" type="tel" maxlength="2" placeholder="DD"/> /
+                <input name="month" type="tel" maxlength="2" placeholder="MM"/> /
+                <input name="year" type="tel" maxlength="4" placeholder="YYYY" />
+            </div></br>
+            
          
             <h5>Do you live on Campus?  <span class="error">* <?php echo $campusErr;?></span></h5>
             <p><input type="radio" name="onCampus" style="margin-left: 34px" value="yes"/>Yes</p>

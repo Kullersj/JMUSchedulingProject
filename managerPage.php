@@ -7,7 +7,7 @@
         <title>
             managerPage
         </title>
-        <link rel="stylesheet" type="text/css" href="css/classSchedule.css">
+        <link rel="stylesheet" type="text/css" href="css/managerPage.css">
         <style type="text/css">
             #Text1
             {
@@ -36,67 +36,78 @@
                 return $data;
             }
         ?>
-        <img src="img/dukes.png" style="width:225px;height:200px">
-        <form id="chart" method='post' action="availabilityChart.php" >
-            <table summary="">
-                <tr>
-                    <td>
-                        <table id="employeeTable">
-                            <tbody id="tbody">
-                            <tr>
-                                <input type="radio" name="people" style="margin-left: 34px" value="Hillside" checked="checked" onclick="disablePeople()"/>Hillside
-                                <input type="radio" name="people" style="margin-left: 34px" value="Showker" onclick="disablePeople()"/>Showker
-                                <input type="radio" name="people" style="margin-left: 34px" value="everyone"onclick="disablePeople()"/>Everyone
-                                <input type="radio" name="people" style="margin-left: 34px" value="custom" onclick="enablePeople()"/>Custom
-                                <td>
-                                    <select name="person[0]" id="person" disabled>
-                                        <?php
-                                            $sql = "SELECT jac, first, last FROM employee";
-                                            $result = $conn->query($sql);
-                                            if ($result->num_rows > 0){
-                                                while($row = $result->fetch_assoc()) {
-                                                    $id = $row['jac'];
-                                                    $name = "{$row['first']} {$row['last']}";
-                                                    echo '<option value="' .$id. '">' .$name.'</option>';
+        <header>
+            <img src="img/dukes.png" style="width:225px;height:200px"> <br>
+            Manager Page!
+        </header>
+        
+        <nav>
+            <a href="managerPage.php">Availability Form</a><br>
+            <a href="nextSemesterPrep.php">Next Semester Prep</a><br>
+            Assistant lookup<br>
+        </nav>
+        <section>
+            <form id="chart" method='post' action="availabilityChart.php" >
+                <table summary="">
+                    <tr>
+                        <td>
+                            <table id="employeeTable">
+                                <tbody id="tbody">
+                                <tr>
+                                    <input type="radio" name="people" style="margin-left: 34px" value="Hillside" checked="checked" onclick="disablePeople()"/>Hillside
+                                    <input type="radio" name="people" style="margin-left: 34px" value="Showker" onclick="disablePeople()"/>Showker
+                                    <input type="radio" name="people" style="margin-left: 34px" value="everyone"onclick="disablePeople()"/>Everyone
+                                    <input type="radio" name="people" style="margin-left: 34px" value="custom" onclick="enablePeople()"/>Custom
+                                    <td>
+                                        <select name="person[0]" id="person" disabled>
+                                            <?php
+                                                $sql = "SELECT jac, first, last FROM employee";
+                                                $result = $conn->query($sql);
+                                                if ($result->num_rows > 0){
+                                                    while($row = $result->fetch_assoc()) {
+                                                        $id = $row['jac'];
+                                                        $name = "{$row['first']} {$row['last']}";
+                                                        echo '<option value="' .$id. '">' .$name.'</option>';
+                                                    }
                                                 }
-                                            }
-                                        ?>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="button" id="addPerson" value="Add Person" onclick="insPerson()" size=10 disabled/>
-                                </td>
-                                <td>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                    <td>
-                        <table summary="">
-                            <tr>
-                                <td>
-                                    <p class="days">M T W Th F</p>
-                                    <p class="boxes">
-                                    <input type="checkbox" name="day[Monday]" value="mon" id="mon" checked/>
-                                    <input type="checkbox" name="day[Tuesday]" value="tue" id="tue" checked/>
-                                    <input type="checkbox" name="day[Wednesday]" value="wed" id="wed" checked/>
-                                    <input type="checkbox" name="day[Thursday]" value="thu" id="thr" checked/>
-                                    <input type="checkbox" name="day[Friday]" value="fri" id="fri" checked/>
-                                    </p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="submit" value=
-                                           "Create Availability Schedule">
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-        </form>
+                                            ?>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="button" id="addPerson" value="Add Person" onclick="insPerson()" size=10 disabled/>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>
+                            <table summary="">
+                                <tr>
+                                    <td>
+                                        <p class="days">M T W Th F</p>
+                                        <p class="boxes">
+                                        <input type="checkbox" name="day[Monday]" value="mon" id="mon" checked/>
+                                        <input type="checkbox" name="day[Tuesday]" value="tue" id="tue" checked/>
+                                        <input type="checkbox" name="day[Wednesday]" value="wed" id="wed" checked/>
+                                        <input type="checkbox" name="day[Thursday]" value="thu" id="thr" checked/>
+                                        <input type="checkbox" name="day[Friday]" value="fri" id="fri" checked/>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="submit" value=
+                                               "Create Availability Schedule">
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </section>
         <script language="JavaScript" src="javascript/modifyPerson.js" type="text/javascript"></script>
     </body>
 </html>
