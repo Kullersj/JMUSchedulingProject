@@ -83,13 +83,11 @@
                     }
                     
                     $subject = strtoupper($subject);
-                    $year = 2015;
-                    $semester = "Spring";
                     
                     $sql = "INSERT INTO class_schedule (jac, subject, number, professor,
-                                location, start_time, end_time, mon, tue, wed, thu, fri, year, semester)
+                                location, start_time, end_time, mon, tue, wed, thu, fri)
                                 VALUES ($jac, '$subject', '$num', '$prof', 
-                                '$loc', '$start', '$end', $mon, $tue, $wed, $thu, $fri, $year, '$semester')";
+                                '$loc', '$start', '$end', $mon, $tue, $wed, $thu, $fri)";
                     if ($conn->query($sql) === TRUE) {
                         $_SESSION["jac"] = $jac;
                         header("Location: workTimes.php");
