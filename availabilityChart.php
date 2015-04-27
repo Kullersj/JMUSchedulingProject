@@ -82,10 +82,11 @@ and open the template in the editor.
                         . "(c.start_time <= Cast('$start' AS time) AND c.end_time >= Cast('$start' AS time)) OR "
                         . "(c.start_time >= Cast('$start' AS time) AND c.start_time <= Cast('$end' AS time))"
                     . ")"
-                . ");";
+                . ")";
             return $sql;
         }
         ?>
+        <b>Availability Chart based on Class Schedule only</b>
         <table id="availabilityTable">
             <tr>
                 <td></td>

@@ -42,7 +42,7 @@ header {
 }
 nav {
     line-height:30px;
-    background-color:#eeeeee;
+    background-color: tan;
     height:300px;
     width:175px;
     float:left;
@@ -53,6 +53,7 @@ section{
     margin-left: 200px;	
     margin-right: 5px;
     margin-top: 50px;
+    height: 300px;
 }
 
 input[type="text"] {

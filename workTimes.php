@@ -20,7 +20,7 @@ and open the template in the editor.
         <?php
         session_start();
         //$jac = $_SESSION['jac'];
-        $jac = 108223437;
+        $jac = $_SESSION['jac'];
         $servername = $_SESSION['servername'];
         $username = $_SESSION['username'];
         $password = $_SESSION['password'];
@@ -76,7 +76,7 @@ and open the template in the editor.
                     
                     if ($conn->query($sql) === TRUE) {
                         $_SESSION["jac"] = $jac;
-                        //header("Location: classSchedule.php");
+                        header("Location: thanks.php");
                         echo "Record created successfully";
                     } else {
                         echo "Error: " . $sql . "<br>" . $conn->error;

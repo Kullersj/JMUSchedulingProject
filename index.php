@@ -144,7 +144,7 @@ and open the template in the editor.
                                     . "expected_graduation='$grad', "
                                     . "onCampus=$onCampus, back_to_back=$back2back, "
                                     . "both_labs=$bothlocation "
-                                    . "WHERE eID=$jac;";
+                                    . "WHERE jac=$jac;";
                             if ($conn->query($sql) === TRUE) {
                                 $_SESSION["jac"] = $jac;
                                 echo "Record updated successfully";

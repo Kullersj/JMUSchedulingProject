@@ -44,7 +44,7 @@
         <nav>
             <a href="managerPage.php">Availability Form</a><br>
             <a href="nextSemesterPrep.php">Next Semester Prep</a><br>
-            Assistant lookup<br>
+            <a href="assistantLookup.php">Assistant lookup</a><br>
             <a href="index.php">Employee Form</a></br>
         </nav>
         <section>
@@ -62,7 +62,7 @@
                                     <td>
                                         <select name="person[0]" id="person" disabled>
                                             <?php
-                                                $sql = "SELECT jac, first, last FROM employee";
+                                                $sql = "SELECT jac, first, last FROM employee ORDER BY first ASC";
                                                 $result = $conn->query($sql);
                                                 if ($result->num_rows > 0){
                                                     while($row = $result->fetch_assoc()) {
