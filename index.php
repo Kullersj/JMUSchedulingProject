@@ -34,7 +34,7 @@ and open the template in the editor.
             // define variables and set to empty values
             $fname = $lname = $phone = $address = $jac = $back2back = 
                     $bothlocation = $location = $onCampus = 
-                    $car = $email = $grad = $date = $month = $year = "";
+                    $car = $email = $grad = "";
             $fnameErr = $lnameErr = $phoneErr = $emailErr = $jacErr = 
                     $locErr = $bothErr = $back2Err = $campusErr = 
                     $addressErr = $carErr = $gradErr = "";
@@ -94,9 +94,6 @@ and open the template in the editor.
                         "location" => FILTER_SANITIZE_STRING,
                         "onCampus" => FILTER_VALIDATE_BOOLEAN,
                         "car" => FILTER_VALIDATE_BOOLEAN,
-                        "year" => FILTER_VALIDATE_INT,
-                        "month" => FILTER_SANITIZE_STRING,
-                        "day" => FILTER_SANITIZE_STRING,
                         "grad" => FILTER_SANITIZE_STRING
                     );
                     $result = filter_input_array(INPUT_POST, $filters);
@@ -112,9 +109,6 @@ and open the template in the editor.
                     $onCampus = test_input($result["onCampus"]);
                     $email = test_input($result["email"]);
                     $car = test_input($result['car']);
-                    $day = test_input($result['day']);
-                    $month = test_input($result['month']);
-                    $year = test_input($result['year']);
                     $grad = test_input($result['grad']);
                     
                     if ($jac !== "" && strlen((string)$jac) === 9){
@@ -140,7 +134,7 @@ and open the template in the editor.
                             $sql = "UPDATE employee
                                    SET first='$fname', last='$lname', phone ='$phone',"
                                     . "email='$email', local_address='$address', "
-                                    . "location='$location', car=$car, birthdate='$birthday', "
+                                    . "location='$location', car=$car, "
                                     . "expected_graduation='$grad', "
                                     . "onCampus=$onCampus, back_to_back=$back2back, "
                                     . "both_labs=$bothlocation "
@@ -156,9 +150,9 @@ and open the template in the editor.
                         else {
                             $sql = "INSERT INTO employee (jac, first, last, phone, email,
                                     local_address, location, expected_graduation, 
-                                    birthdate, car, onCampus, back_to_back, both_labs)
+                                    car, onCampus, back_to_back, both_labs)
                                     VALUES ($jac, '$fname', '$lname', $phone, '$email', '$address',
-                                    '$location', '$grad', '$birthday', $car, $onCampus, $back2back, $bothlocation)";
+                                    '$location', '$grad', $car, $onCampus, $back2back, $bothlocation)";
                             if ($conn->query($sql) === TRUE) {
                                 $_SESSION["jac"] = $jac;
                                 echo "Record created successfully";
@@ -212,15 +206,7 @@ and open the template in the editor.
             <span class="error">* <?php echo $emailErr;?></span></br>
 	    
             <input type="text" name="grad" placeholder="Expected Graduation" style="margin-left: 30px;" value="<?php echo $grad;?>" />
-            <span class="error">* <?php echo $gradErr;?></span></br></br>
-            
-            <label for="day"><b>Date of Birth:<b></label>
-            <div id="date2" class="datefield">
-                <input name="month" type="tel" maxlength="2" placeholder="MM" value="<?php echo $month;?>" /> /
-                <input name="day" type="tel" maxlength="2" placeholder="DD" value="<?php echo $day;?>" /> /
-                <input name="year" type="tel" maxlength="4" placeholder="YYYY" value="<?php echo $year;?>" />
-            </div></br>
-            
+            <span class="error">* <?php echo $gradErr;?></span></br></br>      
          
             <h5>Do you live on Campus?  <span class="error">* <?php echo $campusErr;?></span></h5>
             <p><input type="radio" name="onCampus" style="margin-left: 34px" value="yes"/>Yes</p>
