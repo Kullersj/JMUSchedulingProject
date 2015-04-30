@@ -37,7 +37,7 @@ and open the template in the editor.
                 }
             }
             $jacList .= ")";
-            $jacList = " AND jac IN $jacList";
+            $jacSQL = " AND jac IN $jacList";
             $addSQL .= $jacSQL;
         }
         

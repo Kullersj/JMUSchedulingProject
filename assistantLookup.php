@@ -72,7 +72,7 @@ and open the template in the editor.
         <nav>
             <a href="managerPage.php">Availability Form</a><br>
             <a href="nextSemesterPrep.php">Next Semester Prep</a><br>
-            <a href="assistantLookup.php">Assistant lookup</a><br>
+            <a href="assistantLookup.php">Assistant Lookup</a><br>
             <a href="index.php">Employee Form</a></br>
         </nav>
         <section>
