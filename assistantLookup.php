@@ -36,31 +36,45 @@ and open the template in the editor.
                 
 
                 $ID = $_POST['person'];
-
+                
+                $fullName = nameSQL($ID, $conn);
                 $basicInfo = basicSQL($ID, $conn);
                 $classSchedule = classSQL($ID, $conn);
                 $availability = availabilitySQL($ID,$conn);
             }
             
+            function nameSQL($jac, $conn){
+                $sql = "SELECT first, last from employee WHERE jac = $jac";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    return $result->fetch_assoc();
+                }
+            }
+            
             function basicSQL($jac, $conn){
-                $sql = "SELECT * FROM employee WHERE jac = $jac";
+                $sql = "SELECT jac, phone, email, local_address,"
+                        . " location, expected_graduation, car, onCampus,"
+                        . " back_to_back, both_labs FROM employee WHERE jac = $jac";
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
                     return $result->fetch_assoc();
                 }
             }
             function classSQL($jac, $conn){
-                $sql = "SELECT * FROM class_schedule WHERE jac = $jac";
+                $sql = "SELECT DISTINCT subject, number, professor, location,"
+                        . " start_time, end_time, mon, tue, wed,"
+                        . " thu, fri FROM class_schedule WHERE jac = $jac";
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
-                    return $result->fetch_assoc();
+                    return $result;
                 }
             }
             function availabilitySQL($jac, $conn){
-                $sql = "SELECT * FROM availability WHERE jac = $jac";
+                $sql = "SELECT day, start_time, end_time, preferred, available, "
+                        . "reason FROM availability WHERE jac = $jac";
                 $result = $conn->query($sql);
                 if ($result->num_rows > 0) {
-                    return $result->fetch_assoc();
+                    return $result;
                 }
             }
         ?>
@@ -95,9 +109,76 @@ and open the template in the editor.
             <?php 
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo "</br></br>";
+                    echo "<B>{$fullName['first']} {$fullName['last']}</B>";
+                    echo "</br></br>";
+                    echo "<B>Basic Info</b>";
                     echo "<table>";
-                    
+                    echo "<thead>
+                        <tr>
+                            <td>Jac</td>
+                            <td>Phone Number</td>
+                            <td>Email</td>
+                            <td>Address</td>
+                            <td>Lab</td>
+                            <td>Grad Year</td>
+                            <td>Car</td>
+                            <td>On Campus</td>
+                            <td>Back to Back</td>
+                            <td>Both Labs</td>
+                        </tr>
+                    </thead>";
+                    foreach($basicInfo as $info){
+                        echo "<td>$info</td>";
+                    }
                     echo "</table>";
+                    echo "</br></br>";
+                    
+                    echo "<b>Class Schedule</b>";
+                    echo "<table>";
+                    echo "<thead>
+                        <tr>
+                            <td>Subject</td>
+                            <td>Class Number</td>
+                            <td>Professor</td>
+                            <td>Class Location</td>
+                            <td>Start Time</td>
+                            <td>End Time</td>
+                            <td>Monday</td>
+                            <td>Tuesday</td>
+                            <td>Wednesday</td>
+                            <td>Thursday</td>
+                            <td>Friday</td>
+                        </tr>
+                    </thead>";
+                    
+                    while ($row = $classSchedule->fetch_assoc()) {
+                        echo "<tr>";
+                        foreach($row as $info){
+                            echo "<td>$info</td>";
+                        }
+                        echo "</tr>";
+                    }
+                    echo "</table>";
+                    echo "</br></br>";
+                    echo "<b>Other Conflicts</b>";
+                    echo "<table>";
+                    echo "<thead>
+                        <tr>
+                            <td>Day</td>
+                            <td>Start Time</td>
+                            <td>End Time</td>
+                            <td>Preferred</td>
+                            <td>Available</td>
+                            <td>Reason</td>
+                        </tr>
+                    </thead>";
+                    while ($row = $availability->fetch_assoc()) {
+                        echo "<tr>";
+                        foreach($row as $info){
+                            echo "<td>$info</td>";
+                        }
+                        echo "</tr>";
+                    }
                 }
             ?>
         </section>
