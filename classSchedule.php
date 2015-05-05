@@ -38,7 +38,7 @@
             "start" => FILTER_SANITIZE_STRING,
             "end" => FILTER_SANITIZE_STRING
             );
-        if (is_array($_POST['class'])){
+        if (is_array($_POST['class']) && !empty($_POST['class'][0]['subject'])){
             $classes = $_POST['class'];
             foreach($classes as $class){
                 $result = filter_var_array($class, $filters);

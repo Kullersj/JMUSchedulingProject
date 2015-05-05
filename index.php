@@ -40,6 +40,7 @@ and open the template in the editor.
                     $addressErr = $carErr = $gradErr = "";
             
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                //Check if any variables are missing and if they are create an error message
                 if (empty($_POST["fname"])){
                     $fnameErr = "First name is required";
                 }
@@ -76,11 +77,12 @@ and open the template in the editor.
                 if (empty($_POST["grad"])){
                     $carErr = "When are you supposed to graduate?";
                 }
+                //If no errors continue
                 if (!($fnameErr !== "" || $lnameErr !== "" || $jacErr !== "" || 
                         $phoneErr !== "" || $emailErr !== "" || $back2Err !== "" ||
                         $locErr !== "" || $bothErr !== "" || $addressErr !== "" ||
                         $campusErr !== "")) {
-                    
+                    //Sanitize input
                     $filters = array
                     (
                         "jac" => FILTER_VALIDATE_INT,
@@ -131,6 +133,7 @@ and open the template in the editor.
                         $jacsql = "SELECT jac FROM employee WHERE jac = '$jac'";
                         $result = ($conn->query($jacsql));
                         if($result->num_rows > 0) {
+                            //update employee if exists
                             $sql = "UPDATE employee
                                    SET first='$fname', last='$lname', phone ='$phone',"
                                     . "email='$email', local_address='$address', "
@@ -148,6 +151,7 @@ and open the template in the editor.
                             }
                         }
                         else {
+                            //else create new one
                             $sql = "INSERT INTO employee (jac, first, last, phone, email,
                                     local_address, location, expected_graduation, 
                                     car, onCampus, back_to_back, both_labs)
