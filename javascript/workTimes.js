@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 
+
+//Add a reason box if an assistant is not able to work a shift
+// The reason box is required but Safari is the only browser that does not support it
 function addReason(section) {
     var x = document.getElementById('schedTable');
     var box = section.parentNode;

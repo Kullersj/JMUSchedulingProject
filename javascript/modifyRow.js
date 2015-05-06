@@ -14,6 +14,8 @@ function deleteRow(row) {
     var i = row.parentNode.parentNode.rowIndex;
     var x = document.getElementById('ClassTable');
     x.deleteRow(i);
+    //If there is only one class row left then remove the delete button so there
+    // is at least one input row at all times
     if (x.rows.length === 3){
         var firstDelete = x.rows[2].cells[8].getElementsByTagName('input')[0];
         firstDelete.parentNode.removeChild(firstDelete);
@@ -28,6 +30,8 @@ function insRow() {
     var len = x.rows.length;
     
     if (len === 3){
+        //If len === 3 then only one class has been added and when a new one is
+        // being created the delete button has to be created for the first row
         var firstRowDelete = x.rows[2].cells[8];
         var newButton = document.createElement("input");
         newButton.type = "button";
@@ -37,6 +41,8 @@ function insRow() {
         firstRowDelete.appendChild(newButton);
     }
     var new_row = x.rows[2].cloneNode(true);
+
+    //Create each input and add them to the end of the array
 
     var inp0 = new_row.cells[0].getElementsByTagName('input')[0];
     inp0.id += len;

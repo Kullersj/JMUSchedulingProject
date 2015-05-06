@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+
+Created by: Seth Kuller 2015
+-->
 <html>
     <head>
         <meta charset="UTF-8">
@@ -48,6 +56,7 @@
                 $loc = test_input($result['loc']);
                 $start12 = test_input($result['start']);
                 $end12 = test_input($result['end']);
+                // strtotime() changes the date to 24 hr time
                 $start = date("H:i", strtotime($start12));
                 $end = date("H:i", strtotime($end12));
                 if (!($subject === "" || $num === "")){
@@ -99,6 +108,7 @@
             }
             $conn->close();
         }
+        //Allow assistant to skip the class schedule part to prevent people doing it twice
         else {
             header("Location: workTimes.php");
         }
@@ -151,6 +161,8 @@
                 </thead>
                 <tbody id="tbody">
                     <tr>
+                        <!--Names are in arrays so that all the data is together and names are the same-->
+                        <!--Array length gets increased in modifyRow.js-->
                         <td><input type="text" name="class[1][subject]" id="subject" placeholder="Subject" size=10/></td>
                         <td><input type="text" name="class[1][num]" id="num" placeholder="Class Number" size=10/></td>
                         <td><input type="text" name="class[1][prof]" id="prof" placeholder="Professor" size=10/></td>

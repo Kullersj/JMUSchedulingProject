@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+//reenable the ability to add people to a custom search
 function enablePeople(){
     var person = document.getElementById('person');
     var addButton = document.getElementById('addPerson');
@@ -12,6 +13,7 @@ function enablePeople(){
     addButton.disabled = false;   
 }
 
+//Disable the ability to add people to a custom search if custom has not been pressed
 function disablePeople(){
     var person = document.getElementById('person');
     var addButton = document.getElementById('addPerson');
@@ -30,6 +32,7 @@ function deleteRow(row) {
     }
 }
 
+//Basically the same function as the add row in modifyRow.js
 function insPerson() {
     var x = document.getElementById('employeeTable');
     var tbody = document.getElementById('tbody');

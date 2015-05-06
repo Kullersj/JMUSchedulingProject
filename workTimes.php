@@ -3,6 +3,8 @@
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
+
+Created by: Seth Kuller 2015
 -->
 <html>
     <head>
@@ -47,8 +49,11 @@ and open the template in the editor.
         
         if(is_array($_POST['day'])){
             $days = $_POST['day'];
+            //loop through each day
             foreach($days as $day){
+                //Loop through each shift on that day
                 foreach ($day as $shift){
+                    //get shift time and if they are available or not
                     $time = $shift['time'];
                     $available = $shift['available'];
                     if ($available === "No"){
@@ -126,10 +131,15 @@ and open the template in the editor.
         
                 $days = ['mon', 'tue', 'wed', 'thu', 'fri'];
                 
+                
+                //To not have to hard code each and every shift I loop through each shift one at a time
+                //In each shift I loop through each day and echo the html so create the box
+                //There are two hidden input types in order to actually be able to tell which shift is which when looping through the results
                 foreach($shiftTimes as $key => $value) {
                     $startTime = $key;
                     $endTime = $value;
                     echo '<tr>';
+                    //Convert 24 Hour time to 12 Hour time in order to display shift time better
                     echo "<th>$milToStandTime[$startTime] - $milToStandTime[$endTime]</th>";
                     foreach($days as $day){
                         if (!($day === "fri" && ($startTime === '16:00' || $startTime === '18:00' ||

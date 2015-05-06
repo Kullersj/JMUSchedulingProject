@@ -3,6 +3,8 @@
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
+
+Created by: Seth Kuller 2015
 -->
 <html>
     <head>
@@ -69,6 +71,8 @@ and open the template in the editor.
             echo '</td>';
         }
         
+        //Create the SQL query in order to get people who can work a shift
+        //first run query to get everyone who can't work the shift and then selecting all the names not in that list
         function createSQL($start, $end, $day){
             $sql = "SELECT first, last from employee "
                 . "WHERE jac NOT IN "
@@ -115,6 +119,7 @@ and open the template in the editor.
             </tr>
             <tr>
                 <?php
+                //I set up each shift seperatly instead of making a loop like I did for the work times because I didn't think of it at this point
                 $startTimes = ['7:45', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'];
                 $endTimes = ['10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00', '23:59'];
                 echo '<td>7:45 - 10</td>';
